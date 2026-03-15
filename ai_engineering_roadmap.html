@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Engineering Roadmap — 7 Months to 30–40+ LPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#09090b; --bg2:#111115; --bg3:#17171d; --bg4:#1e1e27; --bg5:#252530;
+  --border:rgba(255,255,255,0.055); --border2:rgba(255,255,255,0.1); --border3:rgba(255,255,255,0.17);
+  --text:#e2dfd8; --text2:#8c887e; --text3:#4a4843;
+  --amber:#d4a441; --amber2:#e8bc5c;
+  --p1:#3ecf7a; --p2:#4d9ff0; --p3:#9f7af5; --p4:#f5a533; --p5:#e85f3d; --p6:#2ec4aa; --p7:#7a8899;
+  --sw:228px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* sidebar */
+.sb{position:fixed;left:0;top:0;bottom:0;width:var(--sw);background:var(--bg2);border-right:1px solid var(--border);z-index:100;display:flex;flex-direction:column;overflow-y:auto}
+.sb-brand{padding:22px 16px 16px;border-bottom:1px solid var(--border)}
+.sb-brand-title{font-family:'Instrument Serif',serif;font-size:16px;color:var(--amber);line-height:1.35;font-style:italic}
+.sb-brand-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);margin-top:4px;letter-spacing:.03em}
+.sb-stats{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:12px 14px;border-bottom:1px solid var(--border)}
+.ss{background:var(--bg3);border-radius:7px;padding:8px 10px;text-align:center;border:1px solid var(--border)}
+.ss-v{font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:500;color:var(--amber)}
+.ss-l{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.sb-nav{flex:1;padding:10px 0}
+.sn-label{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;padding:0 16px 5px;font-family:'IBM Plex Mono',monospace}
+.sn-link{display:flex;align-items:center;gap:7px;padding:6px 16px;color:var(--text2);font-size:11px;text-decoration:none;border-left:2px solid transparent;transition:all .13s}
+.sn-link:hover{background:var(--bg3);color:var(--text)}
+.sn-link.on{background:var(--bg3);color:var(--text);border-left-color:var(--amber)}
+.sn-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sn-wk{font-size:9px;color:var(--text3);margin-left:auto;font-family:'IBM Plex Mono',monospace}
+.sb-prog{padding:12px 14px;border-top:1px solid var(--border)}
+.sp-lbl{font-size:10px;color:var(--text3);display:flex;justify-content:space-between;margin-bottom:5px}
+.sp-track{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.sp-fill{height:100%;background:linear-gradient(90deg,var(--p1),var(--amber));border-radius:2px;transition:width .4s}
+
+/* topbar */
+.topbar{position:fixed;top:0;left:var(--sw);right:0;height:42px;background:rgba(9,9,11,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;padding:0 40px;z-index:50}
+.tb-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3)}
+.tb-track{flex:1;height:3px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.tb-fill{height:100%;background:linear-gradient(90deg,var(--p1),var(--amber));border-radius:2px;transition:width .4s}
+.tb-pct{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--amber)}
+
+/* layout wrapper — everything after sidebar */
+.wrap{margin-left:var(--sw);padding-top:42px}
+
+/* hero */
+.hero{padding:48px 48px 44px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 55% 60% at 15% 40%,rgba(212,164,65,.055) 0%,transparent 65%);pointer-events:none}
+.hero-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-family:'Instrument Serif',serif;font-size:46px;line-height:1.1;color:var(--text);margin-bottom:12px;font-weight:400}
+.hero h1 em{font-style:italic;color:var(--amber)}
+.hero-sub{font-size:14px;color:var(--text2);max-width:560px;line-height:1.75;margin-bottom:28px}
+.hero-stats{display:flex;flex-wrap:wrap;gap:8px}
+.hs{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:12px 16px;min-width:110px}
+.hs-v{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:500;color:var(--amber)}
+.hs-l{font-size:11px;color:var(--text2);margin-top:2px}
+
+/* content */
+.content{padding:0 48px 80px}
+.phase-sec{padding-top:24px;margin-top:36px}
+
+/* phase header */
+.ph{display:flex;align-items:center;gap:10px;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.ph-no{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em}
+.ph-chip{font-size:10px;font-weight:600;padding:3px 11px;border-radius:99px;border:1px solid;white-space:nowrap}
+.ph-title{font-family:'Instrument Serif',serif;font-size:20px;color:var(--text);font-style:italic;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ph-meta{text-align:right;flex-shrink:0}
+.ph-meta .wk{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3)}
+.ph-meta .hr{font-size:11px;color:var(--text2);margin-top:2px}
+
+/* banner */
+.banner{background:rgba(62,207,122,.05);border:1px solid rgba(62,207,122,.14);border-radius:9px;padding:12px 15px;margin-bottom:16px;font-size:12px;color:var(--text2);line-height:1.65}
+.banner strong{color:var(--p1)}
+.banner.perf{background:rgba(77,159,240,.05);border-color:rgba(77,159,240,.14)}
+.banner.perf strong{color:var(--p2)}
+
+/* week cards */
+.wgrid{display:grid;gap:10px}
+.wcard{background:var(--bg2);border:1px solid var(--border);border-radius:11px;overflow:hidden}
+.wcard-hdr{display:flex;align-items:center;gap:11px;padding:13px 16px;background:var(--bg3);cursor:pointer;user-select:none;transition:background .13s}
+.wcard-hdr:hover{background:var(--bg4)}
+.wcard-wn{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);min-width:50px}
+.wcard-topic{font-size:13px;font-weight:600;color:var(--text);flex:1}
+.wcard-hrs{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);background:var(--bg);padding:2px 7px;border-radius:4px}
+.wcard-chev{font-size:9px;color:var(--text3);transition:transform .18s;margin-left:5px}
+.wcard.open .wcard-chev{transform:rotate(180deg)}
+.wcard-body{display:none;padding:3px 16px 16px}
+.wcard.open .wcard-body{display:block}
+
+/* day rows */
+.dtable{width:100%;border-collapse:collapse;margin-top:12px}
+.dtable tr{border-bottom:1px solid var(--border)}
+.dtable tr:last-child{border-bottom:none}
+.dt-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);padding:9px 12px 9px 0;vertical-align:top;white-space:nowrap;width:50px;padding-top:12px}
+.dt-body{padding:8px 0;vertical-align:top}
+.dn{font-size:12px;font-weight:500;color:var(--text);line-height:1.5;margin-bottom:4px}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{font-size:9px;padding:2px 8px;border-radius:4px;text-decoration:none;display:inline-flex;align-items:center;gap:3px;font-family:'IBM Plex Mono',monospace;transition:opacity .13s}
+.chip:hover{opacity:.68}
+.chip::after{content:'↗';font-size:8px}
+.yt{background:rgba(251,146,60,.12);color:#fb923c;border:1px solid rgba(251,146,60,.18)}
+.doc{background:rgba(62,207,122,.09);color:#3ecf7a;border:1px solid rgba(62,207,122,.15)}
+.course{background:rgba(159,122,245,.11);color:#9f7af5;border:1px solid rgba(159,122,245,.17)}
+.art{background:rgba(77,159,240,.09);color:#4d9ff0;border:1px solid rgba(77,159,240,.14)}
+.gh{background:rgba(122,136,153,.1);color:#7a8899;border:1px solid rgba(122,136,153,.15)}
+.perf-chip{background:rgba(232,188,92,.1);color:#e8bc5c;border:1px solid rgba(232,188,92,.2)}
+
+/* weekend */
+.wknd{margin-top:11px;background:rgba(212,164,65,.04);border:1px solid rgba(212,164,65,.13);border-radius:8px;padding:11px 13px}
+.wknd-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--amber);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.wknd-txt{font-size:12px;color:var(--text);line-height:1.5}
+
+/* perf insight */
+.insight{margin-top:10px;background:rgba(77,159,240,.04);border:1px solid rgba(77,159,240,.12);border-radius:7px;padding:10px 12px}
+.insight-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--p2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.insight-txt{font-size:11px;color:var(--text2);line-height:1.55}
+
+/* skills */
+.skwrap{margin-top:18px}
+.sk-hdr{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+.skgrid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.sk{display:flex;align-items:center;gap:7px;padding:6px 9px;background:var(--bg3);border-radius:6px;cursor:pointer;border:1px solid transparent;transition:background .13s}
+.sk:hover{background:var(--bg4)}
+.sk.done{opacity:.4;border-color:var(--border)}
+.sk input{width:12px;height:12px;accent-color:var(--amber);cursor:pointer;flex-shrink:0}
+.sk label{font-size:11px;color:var(--text2);cursor:pointer;flex:1;line-height:1.3}
+.sk.done label{text-decoration:line-through;color:var(--text3)}
+.sklvl{font-size:9px;padding:1px 6px;border-radius:3px;font-family:'IBM Plex Mono',monospace;margin-left:auto;flex-shrink:0}
+.le{background:rgba(62,207,122,.09);color:#3ecf7a}
+.lm{background:rgba(77,159,240,.09);color:#4d9ff0}
+.lh{background:rgba(159,122,245,.11);color:#9f7af5}
+
+/* projects */
+.proj-section{padding:40px 48px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+/* All reference sections need sidebar margin */
+/* reference sections inherit layout from .wrap */
+.sec-ey{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--amber);text-transform:uppercase;letter-spacing:.1em;margin-bottom:7px}
+.sec-title{font-family:'Instrument Serif',serif;font-size:26px;color:var(--text);font-style:italic;margin-bottom:7px}
+.sec-sub{font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:26px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pc{background:var(--bg3);border:1px solid var(--border);border-radius:11px;padding:18px;transition:border-color .18s,transform .18s}
+.pc:hover{border-color:var(--border2);transform:translateY(-2px)}
+.pc.star{border-top:2px solid var(--amber)}
+.pc.cap{border-top:2px solid var(--p5)}
+.pc-n{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.pc-st{color:var(--amber);font-size:10px}
+.pc-m{font-size:9px;color:var(--text3);margin-left:auto}
+.pc-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;line-height:1.3}
+.pc-desc{font-size:11px;color:var(--text2);line-height:1.6;margin-bottom:10px}
+.pc-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:9px}
+.pc-tag{font-size:9px;padding:1px 6px;border-radius:3px;font-family:'IBM Plex Mono',monospace;background:var(--bg4);color:var(--text3);border:1px solid var(--border)}
+.pc-del{font-size:10px;color:var(--text3);padding-top:9px;border-top:1px solid var(--border)}
+.pc-del span{color:var(--text2)}
+
+/* perf systems section */
+.perf-section{padding:40px 48px;border-top:1px solid var(--border)}
+.perf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.pg-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px 18px}
+.pg-icon{font-size:18px;margin-bottom:10px}
+.pg-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px}
+.pg-list{list-style:none}
+.pg-list li{font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);line-height:1.4;display:flex;align-items:baseline;gap:6px}
+.pg-list li:last-child{border-bottom:none}
+.pg-list li::before{content:'→';color:var(--text3);font-size:9px;flex-shrink:0}
+.hot{font-size:8px;padding:1px 5px;border-radius:3px;background:rgba(232,95,61,.12);color:var(--p5);border:1px solid rgba(232,95,61,.2);margin-left:auto;white-space:nowrap;font-family:'IBM Plex Mono',monospace}
+
+/* genai section */
+.genai-section{padding:40px 48px;border-top:1px solid var(--border);background:var(--bg2)}
+.cg{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:20px}
+.cc{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:15px 16px}
+.cc-t{font-size:12px;font-weight:600;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.cc-icon{font-size:14px}
+.cc ul{list-style:none}
+.cc ul li{font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:6px;line-height:1.4}
+.cc ul li:last-child{border-bottom:none}
+.cc ul li::before{content:'·';color:var(--text3);flex-shrink:0}
+
+/* resources */
+.res-section{padding:40px 48px;border-top:1px solid var(--border)}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:20px}
+.rg{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 15px}
+.rg-t{font-size:12px;font-weight:600;color:var(--text);margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.rg-dot{width:6px;height:6px;border-radius:50%}
+a.rl{display:block;font-size:11px;color:var(--text2);text-decoration:none;padding:4px 0;border-bottom:1px solid var(--border);transition:color .13s;font-family:'IBM Plex Mono',monospace;line-height:1.4}
+a.rl:last-child{border-bottom:none}
+a.rl:hover{color:var(--text)}
+
+/* salary */
+.sal-section{padding:40px 48px;border-top:1px solid var(--border);background:var(--bg2)}
+.sal-tl{margin-top:20px;position:relative}
+.sal-tl::before{content:'';position:absolute;left:0;top:16px;bottom:16px;width:1px;background:var(--border)}
+.sal-item{display:flex;gap:18px;margin-bottom:13px;padding-left:16px;position:relative}
+.sal-item::before{content:'';position:absolute;left:-4px;top:18px;width:8px;height:8px;border-radius:50%;background:var(--bg2);border:2px solid var(--amber)}
+.sal-ph{min-width:105px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);padding-top:14px}
+.sal-card{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:12px 14px;display:flex;align-items:center;gap:14px}
+.sal-r{font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:500;color:var(--amber);min-width:88px}
+.sal-info{flex:1}
+.sal-sk{font-size:12px;color:var(--text)}
+.sal-nt{font-size:11px;color:var(--text2);margin-top:2px}
+.sal-bw{width:90px}
+.sal-bt{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.sal-bf{height:100%;background:linear-gradient(90deg,var(--p1),var(--amber));border-radius:2px}
+
+/* schedule */
+.sched-section{padding:40px 48px;border-top:1px solid var(--border)}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.scard{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:15px 16px}
+.scard-t{font-size:12px;font-weight:600;color:var(--text);margin-bottom:10px;display:flex;justify-content:space-between}
+.scard-h{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--amber)}
+.tb{display:flex;gap:9px;padding:6px 0;border-bottom:1px solid var(--border)}
+.tb:last-child{border-bottom:none}
+.tb-time{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);min-width:56px;padding-top:1px}
+.tb-act{font-size:11px;color:var(--text2);line-height:1.4}
+
+/* tips */
+.tips-section{padding:40px 48px;border-top:1px solid var(--border);background:var(--bg2)}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:20px}
+.tip{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:15px 16px;border-left:3px solid var(--amber)}
+.tip p{font-size:11px;color:var(--text2);line-height:1.65}
+.tip strong{color:var(--text)}
+
+.footer{padding:32px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.ft-l{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3)}
+.ft-r{font-family:'Instrument Serif',serif;font-size:20px;color:var(--amber);font-style:italic}
+.btt{position:fixed;bottom:18px;right:18px;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);font-size:10px;font-family:'IBM Plex Mono',monospace;padding:6px 11px;border-radius:7px;cursor:pointer;z-index:200;text-decoration:none;transition:all .13s}
+.btt:hover{background:var(--bg4);color:var(--text)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.hero{animation:fadeUp .4s ease forwards}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sb">
+  <div class="sb-brand">
+    <div class="sb-brand-title">AI Engineering<br>Roadmap</div>
+    <div class="sb-brand-sub">7 months · 30–40+ LPA</div>
+  </div>
+  <div class="sb-stats">
+    <div class="ss"><div class="ss-v">210</div><div class="ss-l">Days</div></div>
+    <div class="ss"><div class="ss-v">560+</div><div class="ss-l">Hours</div></div>
+    <div class="ss"><div class="ss-v">7</div><div class="ss-l">Phases</div></div>
+    <div class="ss"><div class="ss-v">7</div><div class="ss-l">Projects</div></div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sn-label">Phases</div>
+    <a href="#p1" class="sn-link on" data-s="p1"><span class="sn-dot" style="background:var(--p1)"></span>Foundation<span class="sn-wk">Wk 1–4</span></a>
+    <a href="#p2" class="sn-link" data-s="p2"><span class="sn-dot" style="background:var(--p2)"></span>Backend & DB<span class="sn-wk">Wk 5–9</span></a>
+    <a href="#p3" class="sn-link" data-s="p3"><span class="sn-dot" style="background:var(--p3)"></span>Machine Learning<span class="sn-wk">Wk 10–14</span></a>
+    <a href="#p4" class="sn-link" data-s="p4"><span class="sn-dot" style="background:var(--p4)"></span>Deep Learning<span class="sn-wk">Wk 15–20</span></a>
+    <a href="#p5" class="sn-link" data-s="p5"><span class="sn-dot" style="background:var(--p5)"></span>LLMs · RAG · Gen AI<span class="sn-wk">Wk 21–27</span></a>
+    <a href="#p6" class="sn-link" data-s="p6"><span class="sn-dot" style="background:var(--p6)"></span>Deploy & Cloud<span class="sn-wk">Wk 28–29</span></a>
+    <a href="#p7" class="sn-link" data-s="p7"><span class="sn-dot" style="background:var(--p7)"></span>Portfolio & Jobs<span class="sn-wk">Wk 30</span></a>
+    <div class="sn-label" style="margin-top:12px">Reference</div>
+    <a href="#projects" class="sn-link"><span class="sn-dot" style="background:var(--amber)"></span>All Projects</a>
+    <a href="#perf" class="sn-link"><span class="sn-dot" style="background:var(--p2)"></span>Performant AI Systems</a>
+    <a href="#genai" class="sn-link"><span class="sn-dot" style="background:var(--p6)"></span>Gen AI Deep Dive</a>
+    <a href="#resources" class="sn-link"><span class="sn-dot" style="background:var(--p3)"></span>Resources</a>
+    <a href="#salary" class="sn-link"><span class="sn-dot" style="background:var(--p1)"></span>Salary Targets</a>
+    <a href="#schedule" class="sn-link"><span class="sn-dot" style="background:var(--p5)"></span>Daily Schedule</a>
+  </nav>
+  <div class="sb-prog">
+    <div class="sp-lbl"><span>Skills progress</span><span id="ov-pct">0%</span></div>
+    <div class="sp-track"><div class="sp-fill" id="ov-bar" style="width:0%"></div></div>
+  </div>
+</aside>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span class="tb-lbl">Progress</span>
+  <div class="tb-track"><div class="tb-fill" id="tb-fill" style="width:0%"></div></div>
+  <span class="tb-pct" id="tb-pct">— skills</span>
+</div>
+
+<!-- ALL CONTENT INSIDE ONE WRAP — sidebar offset + topbar offset applied once -->
+<div class="wrap">
+
+<section class="hero" id="top">
+  <div class="hero-tag">// Day-by-day · Resource-linked · Built for you</div>
+  <h1>From Basic Python<br>to <em>AI Engineer</em></h1>
+  <p class="hero-sub">A complete 7-month plan: Foundation → Backend & DB → Machine Learning → Deep Learning → Gen AI → Deploy → Jobs. Built for your background: React developer, basic Python, 1 hr/day weekdays + 3–4 hrs weekends. Sequential, no overlap.</p>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-v">30 wks</div><div class="hs-l">Timeline</div></div>
+    <div class="hs"><div class="hs-v">~570 hrs</div><div class="hs-l">Total learning</div></div>
+    <div class="hs"><div class="hs-v">7 phases</div><div class="hs-l">Sequential path</div></div>
+    <div class="hs"><div class="hs-v">7 projects</div><div class="hs-l">Portfolio</div></div>
+    <div class="hs"><div class="hs-v">65+ skills</div><div class="hs-l">Checkable</div></div>
+    <div class="hs"><div class="hs-v">40+ LPA</div><div class="hs-l">Target</div></div>
+  </div>
+</section>
+
+<!-- Phase sections injected here by JS -->
+<div class="content" id="main-content"></div>
+
+<!-- PROJECTS -->
+<section class="proj-section" id="projects">
+  <div class="sec-ey">// Portfolio</div>
+  <h2 class="sec-title">7 Portfolio Projects</h2>
+  <p class="sec-sub">Each project is deployed, has a README, and can be demoed in 2 minutes. Projects 2, 5, 6 & 7 are your 30–40 LPA interview centrepieces. Project 2 (full backend stack) is something 90% of AI candidates can't show.</p>
+  <div class="pgrid" id="pgrid"></div>
+</section>
+
+<!-- PERFORMANT AI SYSTEMS -->
+<section class="perf-section" id="perf">
+  <div class="sec-ey">// Building efficient systems</div>
+  <h2 class="sec-title">Performant AI Backend Patterns</h2>
+  <p class="sec-sub">The patterns that separate production AI systems from demos. These are taught progressively across Phase 2 (backend) and Phase 5 (Gen AI), then applied in your capstone.</p>
+  <div class="perf-grid" id="perf-grid"></div>
+</section>
+
+<!-- GEN AI DEEP DIVE -->
+<section class="genai-section" id="genai">
+  <div class="sec-ey">// Advanced Gen AI Engineering</div>
+  <h2 class="sec-title">Gen AI Deep Dive</h2>
+  <p class="sec-sub">All the Gen AI depth a 30–40 LPA AI Engineer needs — RAG, agents, MCP, fine-tuning, production stack.</p>
+  <div class="cg" id="cg"></div>
+</section>
+
+<!-- RESOURCES -->
+<section class="res-section" id="resources">
+  <div class="sec-ey">// Verified resources</div>
+  <h2 class="sec-title">Complete Resource Library</h2>
+  <p class="sec-sub">Every resource is free and verified. Prioritise these over paid courses.</p>
+  <div class="rgrid" id="rgrid"></div>
+</section>
+
+<!-- SALARY -->
+<section class="sal-section" id="salary">
+  <div class="sec-ey">// Market reality</div>
+  <h2 class="sec-title">Salary Trajectory</h2>
+  <p class="sec-sub">India market (Bangalore / Hyderabad / Remote). Backend skills give you an edge — most AI candidates don't have them.</p>
+  <div class="sal-tl" id="sal-tl"></div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="sched-section" id="schedule">
+  <div class="sec-ey">// Routine</div>
+  <h2 class="sec-title">Daily & Weekly Schedule</h2>
+  <p class="sec-sub">Consistency beats intensity. 1 hr/day × 210 days compounds more than weekend cramming.</p>
+  <div class="sgrid" id="sgrid"></div>
+</section>
+
+<!-- TIPS -->
+<section class="tips-section">
+  <div class="sec-ey">// Strategy</div>
+  <h2 class="sec-title">Key Principles</h2>
+  <div class="tgrid" id="tgrid"></div>
+</section>
+
+<div class="footer">
+  <div class="ft-l">AI Engineering Roadmap · 7 months · 210 days</div>
+  <div class="ft-r">30–40+ LPA</div>
+</div>
+
+</div><!-- /.wrap -->
+
+<a href="#top" class="btt">↑ top</a>
+
+<script>
+// ================================================================
+//  ALL DATA
+// ================================================================
+
+const PHASES=[
+// ── PHASE 1 ──────────────────────────────────────────────────────
+{id:'p1',no:'Phase 1',chip:'Foundation',color:'var(--p1)',cb:'rgba(62,207,122,.07)',cc:'rgba(62,207,122,.25)',wk:'1–4',hr:'~65 hrs',banner:null,
+weeks:[
+ {w:'Week 1',t:'Python refresh · type hints · Pydantic · async basics',h:'7 hrs',days:[
+  {d:'Mon',n:'Python OOP: classes, inheritance, magic methods, dataclasses, generators',r:[{l:'https://www.youtube.com/watch?v=Ej_02ICOIgs',n:'Corey Schafer – Python OOP',c:'yt'}]},
+  {d:'Tue',n:'Exceptions, file I/O, context managers, decorators — from scratch',r:[{l:'https://docs.python.org/3/tutorial/errors.html',n:'Python Errors Docs',c:'doc'}]},
+  {d:'Wed',n:'Type hints (str, int, List, Optional, Union, TypeVar) + Pydantic v2: models, validators, field constraints',r:[{l:'https://docs.pydantic.dev/latest/concepts/models/',n:'Pydantic v2 Models Docs',c:'doc'},{l:'https://realpython.com/python-type-checking/',n:'Real Python – Type Hints Guide',c:'art'}]},
+  {d:'Thu',n:'Virtual envs (venv/uv), pip, project structure, .env files + python-dotenv, secrets management',r:[{l:'https://realpython.com/python-virtual-environments-a-primer/',n:'Real Python – Virtual Envs',c:'art'},{l:'https://pypi.org/project/python-dotenv/',n:'python-dotenv docs',c:'doc'}]},
+  {d:'Fri',n:'async/await Python: event loop, coroutines, asyncio.gather, asyncio.create_task, when NOT to use async',r:[{l:'https://realpython.com/async-io-python/',n:'Real Python – Async IO Python',c:'art'}]},
+ ],wknd:'Git + GitHub: commits, branches, PRs, .gitignore. Jupyter + VS Code setup (freeCodeCamp Git course). Then build a CLI tool with type hints + Pydantic validation and push to GitHub with README.'},
+ {w:'Week 2',t:'NumPy · Pandas · EDA workflow',h:'7 hrs',days:[
+  {d:'Mon',n:'NumPy: arrays, dtypes, indexing, slicing, reshaping, broadcasting — practical exercises',r:[{l:'https://www.youtube.com/watch?v=QUT1VHiLmmI',n:'freeCodeCamp – NumPy Full Course',c:'yt'}]},
+  {d:'Tue',n:'NumPy linear algebra: dot product, matrix multiply, inverse, eigenvalues',r:[{l:'https://numpy.org/doc/stable/reference/routines.linalg.html',n:'NumPy linalg docs',c:'doc'}]},
+  {d:'Wed',n:'Pandas: Series, DataFrame, read_csv, groupby, merge, pivot, string ops',r:[{l:'https://www.youtube.com/watch?v=vmEHCJofslg',n:'freeCodeCamp – Pandas Full Course',c:'yt'}]},
+  {d:'Thu',n:'Data cleaning: nulls, duplicates, type casting, outlier detection. Matplotlib + Seaborn charts.',r:[{l:'https://www.kaggle.com/learn/pandas',n:'Kaggle – Pandas Micro-course',c:'course'}]},
+  {d:'Fri',n:'EDA workflow: read → explore → clean → visualise → summarise. Real dataset practice.',r:[{l:'https://www.youtube.com/watch?v=3Xc3CA655Y4',n:'freeCodeCamp – Matplotlib Tutorial',c:'yt'}]},
+ ],wknd:'Full EDA on Titanic dataset. 5 insights, clean notebook, push to GitHub.'},
+ {w:'Week 3',t:'Math for ML — linear algebra, calculus, probability, cross-entropy',h:'7 hrs',days:[
+  {d:'Mon',n:'Linear algebra: vectors, matrices, dot products, eigenvalues — build intuition visually',r:[{l:'https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab',n:'3Blue1Brown – Essence of Linear Algebra',c:'yt'}]},
+  {d:'Tue',n:'Calculus: derivatives, chain rule, partial derivatives — visual first, then notation',r:[{l:'https://www.youtube.com/watch?v=WUvTyaaNkzM&list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr',n:'3Blue1Brown – Essence of Calculus',c:'yt'}]},
+  {d:'Wed',n:'Gradient descent: what it does, why it works, learning rate intuition. Implement in NumPy.',r:[{l:'https://www.youtube.com/watch?v=IHZwWFHWa-w',n:'StatQuest – Gradient Descent',c:'yt'}]},
+  {d:'Thu',n:'Probability: conditional prob, Bayes theorem, distributions (normal, binomial, Poisson)',r:[{l:'https://www.youtube.com/watch?v=uzkc-qNVoOk',n:'StatQuest – Probability Basics',c:'yt'}]},
+  {d:'Fri',n:'Cross-entropy loss from first principles: why not MSE for classification? Information theory basics.',r:[{l:'https://www.youtube.com/watch?v=6ArSys5qHAU',n:'StatQuest – Cross Entropy & KL Divergence',c:'yt'}]},
+ ],wknd:'Implement gradient descent from scratch in NumPy on a toy dataset. Plot convergence.'},
+ {w:'Week 4',t:'Statistics + project 1 + phase review',h:'6 hrs',days:[
+  {d:'Mon',n:'Statistics: mean, variance, std, z-score, hypothesis testing, p-values',r:[{l:'https://www.youtube.com/watch?v=xxpc-HPKN28',n:'StatQuest – Statistics Basics',c:'yt'}]},
+  {d:'Tue',n:'Review: OOP, type hints, Pydantic, async, NumPy, Pandas — identify gaps',r:[{l:'https://www.youtube.com/@statquest',n:'StatQuest Channel (bookmark this)',c:'yt'}]},
+  {d:'Wed',n:'Polish Project 1: EDA notebook. Clean code, good README, .gitignore.',r:[]},
+  {d:'Thu',n:'Share Project 1 on LinkedIn with a 2-paragraph post explaining what you built.',r:[]},
+  {d:'Fri',n:'Preview Phase 2: skim FastAPI docs, SQL basics refresher, understand what asyncpg is.',r:[{l:'https://fastapi.tiangolo.com/tutorial/',n:'FastAPI Tutorial Intro',c:'doc'}]},
+ ],wknd:'Rest. Mentally prep for the backend phase — it\'s 5 weeks of proper engineering.'},
+]},
+
+// ── PHASE 2 ──────────────────────────────────────────────────────
+{id:'p2',no:'Phase 2',chip:'Backend & DB',color:'var(--p2)',cb:'rgba(77,159,240,.07)',cc:'rgba(77,159,240,.25)',wk:'5–9',hr:'~80 hrs',
+ banner:'<strong>Backend & Databases.</strong> A 30–40 LPA AI Engineer who can\'t build proper APIs, design schemas, or write efficient queries gets exposed in every system design interview. This phase builds a production-grade full-stack backend that most AI candidates can\'t demonstrate — and every skill here directly powers the Gen AI systems you build in Phase 5.',
+weeks:[
+ {w:'Week 5',t:'FastAPI deep dive — async APIs, REST design, dependency injection',h:'9 hrs',days:[
+  {d:'Mon',n:'FastAPI: path/query params, request body, response models (Pydantic), status codes, Swagger UI',r:[{l:'https://fastapi.tiangolo.com/tutorial/',n:'FastAPI Official Tutorial',c:'doc'}]},
+  {d:'Tue',n:'Async endpoints: async def vs def — when to use each. Background tasks. Lifespan events.',r:[{l:'https://fastapi.tiangolo.com/tutorial/bigger-applications/',n:'FastAPI – Bigger Applications',c:'doc'}]},
+  {d:'Wed',n:'Dependency injection: reusable deps, chaining deps, DB session injection, settings injection',r:[{l:'https://fastapi.tiangolo.com/tutorial/dependencies/',n:'FastAPI – Dependencies Tutorial',c:'doc'},{l:'https://github.com/zhanymkanov/fastapi-best-practices',n:'FastAPI Best Practices (GitHub — must read)',c:'gh'}]},
+  {d:'Thu',n:'REST API design: versioning (/v1/), error handling with HTTPException, custom error responses, CORS, middleware',r:[{l:'https://realpython.com/fastapi-python-web-apis/',n:'Real Python – FastAPI Full Guide',c:'art'}]},
+  {d:'Fri',n:'API testing: pytest + TestClient, fixtures, conftest.py, parametrize, test coverage',r:[{l:'https://fastapi.tiangolo.com/tutorial/testing/',n:'FastAPI Testing Docs',c:'doc'}]},
+ ],wknd:'Build a full typed CRUD REST API (task manager or notes app). No DB yet — in-memory dict. Full pytest test suite.',insight:'Thin endpoints, thick services. Your endpoint should only parse input and return output. All logic lives in a service layer. This is the architecture that keeps LLM apps from turning into unmaintainable spaghetti.'},
+ {w:'Week 6',t:'SQL + PostgreSQL — from queries to production indexing',h:'9 hrs',days:[
+  {d:'Mon',n:'SQL fundamentals: SELECT, WHERE, GROUP BY, HAVING, ORDER BY, LIMIT, OFFSET',r:[{l:'https://www.youtube.com/watch?v=HXV3zeQKqGY',n:'freeCodeCamp – SQL Full Course (4hrs)',c:'yt'}]},
+  {d:'Tue',n:'Joins: INNER, LEFT, RIGHT, FULL OUTER, self-join. Subqueries, CTEs (WITH), window functions.',r:[{l:'https://www.kaggle.com/learn/intro-to-sql',n:'Kaggle – Intro to SQL',c:'course'},{l:'https://sqlzoo.net/wiki/SQL_Tutorial',n:'SQLZoo – Interactive SQL Practice',c:'course'}]},
+  {d:'Wed',n:'PostgreSQL setup: psql, pgAdmin, schemas, JSONB, UUID, arrays, enum types',r:[{l:'https://www.postgresql.org/docs/current/tutorial.html',n:'PostgreSQL Official Tutorial',c:'doc'}]},
+  {d:'Thu',n:'Indexes: B-tree, GIN (JSONB/array), partial indexes, composite indexes. EXPLAIN ANALYZE to find bottlenecks.',r:[{l:'https://www.postgresql.org/docs/current/indexes.html',n:'PostgreSQL Indexes Docs',c:'doc'}]},
+  {d:'Fri',n:'Database design: normalisation (1NF–3NF), foreign keys, constraints, ER diagrams',r:[{l:'https://www.youtube.com/watch?v=ztHopE5Wnpc',n:'freeCodeCamp – Database Design (8hrs)',c:'yt'}]},
+ ],wknd:'Design + build a PostgreSQL schema for your CRUD API. Write 10 queries including joins, CTEs, and window functions.',insight:'OpenAI scales ChatGPT on PostgreSQL. They use PgBouncer for connection pooling — reducing connection latency from 50ms to 5ms. Connection pooling is one of the most impactful DB performance wins you\'ll learn.'},
+ {w:'Week 7',t:'SQLAlchemy ORM · Alembic migrations · MongoDB',h:'9 hrs',days:[
+  {d:'Mon',n:'SQLAlchemy 2.0 ORM: declarative models, relationships (one-to-many, many-to-many), lazy/eager loading',r:[{l:'https://docs.sqlalchemy.org/en/20/orm/quickstart.html',n:'SQLAlchemy 2.0 ORM Quickstart',c:'doc'}]},
+  {d:'Tue',n:'Async SQLAlchemy + asyncpg: async_sessionmaker, connection pooling (pool_size, max_overflow)',r:[{l:'https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html',n:'SQLAlchemy Async Docs',c:'doc'}]},
+  {d:'Wed',n:'Alembic migrations: autogenerate, upgrade, downgrade, revision history, offline migrations',r:[{l:'https://alembic.sqlalchemy.org/en/latest/tutorial.html',n:'Alembic Tutorial',c:'doc'}]},
+  {d:'Thu',n:'MongoDB: document model vs relational, when to choose MongoDB. PyMongo async API (Motor deprecated May 2025).',r:[{l:'https://www.mongodb.com/docs/languages/python/pymongo-driver/current/',n:'PyMongo Async Driver Docs (new official)',c:'doc'},{l:'https://realpython.com/introduction-to-mongodb-and-python/',n:'Real Python – MongoDB + Python',c:'art'},{l:'https://beanie-odm.dev/tutorial/defining-a-document/',n:'Beanie ODM – Document Tutorial',c:'doc'}]},
+  {d:'Fri',n:'Beanie ODM for MongoDB + FastAPI: async document models, find, update, delete, aggregations',r:[{l:'https://beanie-odm.dev/',n:'Beanie ODM Docs',c:'doc'}]},
+ ],wknd:'Add PostgreSQL + SQLAlchemy async + Alembic to your CRUD API. Add a MongoDB collection for logs/events.',insight:'Async SQLAlchemy with asyncpg prevents the main thread from blocking on DB queries — critical when your FastAPI endpoint also calls an LLM API. Without async DB, your concurrent request throughput collapses.'},
+ {w:'Week 8',t:'Redis · Celery · JWT auth · rate limiting',h:'9 hrs',days:[
+  {d:'Mon',n:'Redis data structures: strings, hashes, lists, sets, sorted sets, pub/sub. redis-py async client.',r:[{l:'https://redis.io/docs/latest/get-started/',n:'Redis Getting Started',c:'doc'},{l:'https://www.youtube.com/watch?v=jgpVdJB2sKQ',n:'freeCodeCamp – Redis Course',c:'yt'}]},
+  {d:'Tue',n:'Redis caching patterns: cache-aside, write-through, read-through. TTL, invalidation strategies. Semantic caching for LLM responses.',r:[{l:'https://realpython.com/python-redis/',n:'Real Python – Redis with Python',c:'art'},{l:'https://redis-py.readthedocs.io/en/stable/commands.html#redis.asyncio',n:'redis-py Async Client Docs',c:'doc'}]},
+  {d:'Wed',n:'Celery: task queues, workers, Redis/RabbitMQ broker, retries with exponential backoff, beat scheduling',r:[{l:'https://docs.celeryq.dev/en/stable/getting-started/introduction.html',n:'Celery Docs',c:'doc'}]},
+  {d:'Thu',n:'JWT authentication: access + refresh tokens, expiry, FastAPI security. OAuth2 flows, API key auth.',r:[{l:'https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/',n:'FastAPI – JWT Auth Tutorial',c:'doc'}]},
+  {d:'Fri',n:'Rate limiting (slowapi/fastapi-limiter), request queuing, circuit breakers, retry storms prevention',r:[{l:'https://github.com/laurentS/slowapi',n:'slowapi – FastAPI rate limiting',c:'gh'}]},
+ ],wknd:'Add Redis caching + JWT auth + Celery background task to your API. Test rate limiting.',insight:'Rate limiting and circuit breakers are not optional in AI backends. A single slow LLM call without a circuit breaker can cascade into a full API outage under load.'},
+ {w:'Week 9',t:'Performant AI backend systems — architecture + Docker',h:'9 hrs',days:[
+  {d:'Mon',n:'Thin endpoints, thick services architecture. Prompt versioning as first-class concern (not Git comments).',r:[{l:'https://agentsarcade.com/blog/building-llm-apps-with-fastapi-best-practices',n:'Building LLM Apps with FastAPI – Best Practices',c:'art'}]},
+  {d:'Tue',n:'Async patterns for AI: parallel LLM + DB calls with asyncio.gather. Never block the event loop.',r:[{l:'https://github.com/zhanymkanov/fastapi-best-practices',n:'FastAPI Best Practices GitHub',c:'gh'}]},
+  {d:'Wed',n:'Connection pooling deep dive: asyncpg pool_size/max_overflow tuning. PgBouncer concept. Preventing pool exhaustion.',r:[{l:'https://docs.sqlalchemy.org/en/20/core/pooling.html',n:'SQLAlchemy Connection Pool Docs',c:'doc'},{l:'https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html',n:'SQLAlchemy Async Engine Docs',c:'doc'}]},
+  {d:'Thu',n:'Docker: Dockerfile, multi-stage builds, docker-compose with FastAPI + PostgreSQL + Redis + MongoDB + Celery',r:[{l:'https://www.youtube.com/watch?v=3c-iBn73dDE',n:'TechWorld with Nana – Docker Full Course',c:'yt'}]},
+  {d:'Fri',n:'Review Phase 2: async patterns, connection pooling, JWT, rate limiting. Identify any gaps before building.',r:[{l:'https://github.com/zhanymkanov/fastapi-best-practices',n:'FastAPI Best Practices GitHub',c:'gh'}]},
+ ],wknd:'Project 2: Plan architecture diagram, then start building. FastAPI + PostgreSQL (asyncpg) + SQLAlchemy + Alembic + Redis + MongoDB + Celery + JWT auth + rate limiting + Docker compose.',insight:'Async only solves one layer. If your prompts are bloated, your retrieval does full table scans, and you rebuild embeddings on every request — async just lets you fail faster. Design for performance before you optimise concurrency.'},
+]},
+
+// ── PHASE 3 ──────────────────────────────────────────────────────
+{id:'p3',no:'Phase 3',chip:'Machine Learning',color:'var(--p3)',cb:'rgba(159,122,245,.07)',cc:'rgba(159,122,245,.25)',wk:'10–14',hr:'~75 hrs',banner:null,
+weeks:[
+ {w:'Week 10',t:'Supervised learning — regression, classification, scikit-learn',h:'8 hrs',days:[
+  {d:'Mon',n:'Linear regression: cost function, gradient descent, R². Why cross-entropy, not MSE, for classification.',r:[{l:'https://www.youtube.com/watch?v=nk2CQITm_eo',n:'StatQuest – Linear Regression',c:'yt'},{l:'https://www.kaggle.com/learn/intro-to-machine-learning',n:'Kaggle – Intro to Machine Learning',c:'course'}]},
+  {d:'Tue',n:'Logistic regression: sigmoid, binary + multiclass, log loss, softmax',r:[{l:'https://www.youtube.com/watch?v=yIYKR4sgzI8',n:'StatQuest – Logistic Regression',c:'yt'}]},
+  {d:'Wed',n:'Decision trees, random forests, feature importance, gini vs entropy impurity',r:[{l:'https://www.youtube.com/watch?v=J4Wdy0Wc_xQ',n:'StatQuest – Decision Trees & Random Forests',c:'yt'}]},
+  {d:'Thu',n:'Scikit-learn: Pipeline + ColumnTransformer, train_test_split, cross-validation (stratified k-fold)',r:[{l:'https://scikit-learn.org/stable/getting_started.html',n:'Scikit-learn Getting Started',c:'doc'}]},
+  {d:'Fri',n:'Data leakage: what it is, why it ruins production models, how to prevent it (never fit on test data)',r:[{l:'https://www.youtube.com/watch?v=fSytzGwwBVw',n:'StatQuest – Cross Validation',c:'yt'}]},
+ ],wknd:'Titanic classifier: 3 models, proper pipelines, evaluation metrics. Serve via FastAPI (reuse Phase 2 backend). Store predictions in PostgreSQL.'},
+ {w:'Week 11',t:'Model evaluation · feature engineering · XGBoost · Optuna',h:'8 hrs',days:[
+  {d:'Mon',n:'Metrics: precision, recall, F1, AUC-ROC, confusion matrix. When to optimise each.',r:[{l:'https://www.youtube.com/watch?v=4jRBRDbJemM',n:'StatQuest – ROC and AUC',c:'yt'}]},
+  {d:'Tue',n:'Feature engineering: OHE, target encoding, scaling (standard/minmax/robust), missing values',r:[{l:'https://www.kaggle.com/learn/feature-engineering',n:'Kaggle – Feature Engineering',c:'course'}]},
+  {d:'Wed',n:'Regularisation: L1 (Lasso), L2 (Ridge), ElasticNet. XGBoost and LightGBM: boosting intuition, hyperparameters.',r:[{l:'https://www.youtube.com/watch?v=OtD8wVaFm6E',n:'StatQuest – XGBoost',c:'yt'}]},
+  {d:'Thu',n:'Optuna: hyperparameter optimisation with TPE sampler. MLflow: log params, metrics, artifacts.',r:[{l:'https://optuna.org/',n:'Optuna Docs',c:'doc'},{l:'https://mlflow.org/docs/latest/getting-started/intro-quickstart/',n:'MLflow Quickstart',c:'doc'}]},
+  {d:'Fri',n:'Ensemble methods: voting, stacking, bagging. Imbalanced datasets: SMOTE, class weights, threshold tuning.',r:[{l:'https://imbalanced-learn.org/stable/',n:'imbalanced-learn Docs',c:'doc'}]},
+ ],wknd:'Improve your model: XGBoost + Optuna tuning + MLflow tracking. Store model run results in PostgreSQL.'},
+ {w:'Week 12',t:'Unsupervised learning · MLflow · end-to-end ML',h:'7 hrs',days:[
+  {d:'Mon',n:'K-means, elbow method, hierarchical clustering, DBSCAN. PCA: eigenvectors, explained variance.',r:[{l:'https://www.youtube.com/watch?v=4b5d3muPQmA',n:'StatQuest – K-means',c:'yt'},{l:'https://www.youtube.com/watch?v=FgakZw6K1QQ',n:'StatQuest – PCA',c:'yt'}]},
+  {d:'Tue',n:'t-SNE and UMAP for high-dim visualisation. When to use each.',r:[{l:'https://www.youtube.com/watch?v=NEaUSP4YerM',n:'StatQuest – t-SNE',c:'yt'}]},
+  {d:'Wed',n:'Scikit-learn pipeline end-to-end: preprocessor → model → predict → evaluate. Model saving with joblib.',r:[{l:'https://scikit-learn.org/stable/modules/compose.html',n:'Scikit-learn Pipelines',c:'doc'}]},
+  {d:'Thu',n:'Model serving architecture: synchronous (FastAPI endpoint) vs async (Celery worker for slow inference)',r:[]},
+  {d:'Fri',n:'Kaggle: join House Prices, submit first entry. Read top kernel notebooks.',r:[{l:'https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques',n:'Kaggle – House Prices',c:'course'}]},
+ ],wknd:'Customer segmentation: clustering + PCA + t-SNE. Build FastAPI endpoint. Cache results in Redis.'},
+ {w:'Week 13',t:'Project 3 — full ML API + review',h:'7 hrs',days:[
+  {d:'Mon',n:'Project 3: train → evaluate → log with MLflow → save → serve via FastAPI → store predictions in PostgreSQL → cache in Redis',r:[]},
+  {d:'Tue',n:'Write README and record 2-min demo video for Project 3.',r:[{l:'https://www.loom.com/',n:'Loom – free screen recorder',c:'art'}]},
+  {d:'Wed',n:'Phase 3 review: revise bias-variance, evaluation metrics, feature engineering. Anki flashcards.',r:[]},
+  {d:'Thu',n:'Preview deep learning: watch 3Blue1Brown Neural Networks playlist. List your questions.',r:[{l:'https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi',n:'3Blue1Brown – Neural Networks playlist',c:'yt'}]},
+  {d:'Fri',n:'Push all projects. Take stock: what do you understand? what\'s fuzzy? Fix gaps now.',r:[]},
+ ],wknd:'Optional: iterate on Kaggle submission. Read one ML blog post. Rest before deep learning.'},
+ {w:'Week 14',t:'Phase 3 buffer + Kaggle iteration',h:'5 hrs',days:[
+  {d:'Mon',n:'Kaggle: iterate on House Prices entry. Add new features, try stacking.',r:[]},
+  {d:'Tue',n:'Revise: explain logistic regression, gradient descent, and XGBoost to yourself out loud.',r:[]},
+  {d:'Wed',n:'Read fast.ai Lesson 1 as a preview. Identify concepts you don\'t know yet.',r:[{l:'https://course.fast.ai/',n:'fast.ai – Practical Deep Learning',c:'course'}]},
+  {d:'Thu',n:'Polish all 3 projects: READMEs, clean code, demo videos.',r:[]},
+  {d:'Fri',n:'LinkedIn post about what you\'ve built so far. Start building an audience.',r:[]},
+ ],wknd:'Rest. You\'re about to enter the hardest phase (deep learning). You\'re ready.'},
+]},
+
+// ── PHASE 4 ──────────────────────────────────────────────────────
+{id:'p4',no:'Phase 4',chip:'Deep Learning',color:'var(--p4)',cb:'rgba(245,165,51,.07)',cc:'rgba(245,165,51,.25)',wk:'15–20',hr:'~90 hrs',banner:null,
+weeks:[
+ {w:'Week 15',t:'Neural networks from scratch · PyTorch · batch norm · LR scheduling',h:'9 hrs',days:[
+  {d:'Mon',n:'Neurons, activations (ReLU, sigmoid, tanh, GELU), forward pass. Batch normalisation and dropout — why they matter.',r:[{l:'https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi',n:'3Blue1Brown – Neural Networks (playlist)',c:'yt'}]},
+  {d:'Tue',n:'Backpropagation from scratch: chain rule, computing gradients manually. Build Karpathy micrograd.',r:[{l:'https://www.youtube.com/watch?v=VMj-3S1tku0',n:'Karpathy – Micrograd (backprop from scratch)',c:'yt'}]},
+  {d:'Wed',n:'PyTorch: tensors, autograd, training loop, loss functions, optimisers (SGD, Adam, AdamW)',r:[{l:'https://pytorch.org/tutorials/beginner/basics/intro.html',n:'PyTorch Official Beginner Tutorial',c:'doc'}]},
+  {d:'Thu',n:'Learning rate scheduling: cosine decay, linear warmup, OneCycleLR. Why it matters for stable training.',r:[{l:'https://pytorch.org/docs/stable/optim.html',n:'PyTorch LR Scheduler Docs',c:'doc'}]},
+  {d:'Fri',n:'Build 2-layer neural net in PyTorch on MNIST. Apply batch norm + dropout. Observe training stability.',r:[{l:'https://course.fast.ai/Lessons/lesson1.html',n:'fast.ai – Practical DL for Coders (Lesson 1)',c:'course'}]},
+ ],wknd:'Complete Karpathy micrograd: build your own tiny autograd engine from scratch in Python.'},
+ {w:'Week 16',t:'CNNs · transfer learning · fast.ai tricks',h:'9 hrs',days:[
+  {d:'Mon',n:'CNN architecture: convolutions, filters, pooling (max/avg), strides, padding, receptive field',r:[{l:'https://www.youtube.com/watch?v=YRhxdVk_sIs',n:'StatQuest – CNNs Clearly Explained',c:'yt'}]},
+  {d:'Tue',n:'ResNet, VGG, EfficientNet. Transfer learning: freeze backbone, train classification head.',r:[{l:'https://pytorch.org/vision/stable/models.html',n:'torchvision Models Docs',c:'doc'}]},
+  {d:'Wed',n:'fast.ai practical tricks: 1-cycle LR policy, mixed precision training, progressive resizing',r:[{l:'https://course.fast.ai/Lessons/lesson1.html',n:'fast.ai – Image Classification Lesson',c:'course'}]},
+  {d:'Thu',n:'Data augmentation: torchvision transforms, albumentations, test-time augmentation (TTA)',r:[{l:'https://albumentations.ai/docs/',n:'Albumentations Docs',c:'doc'}]},
+  {d:'Fri',n:'HuggingFace Hub: load a vision model, run inference, push your own model',r:[{l:'https://huggingface.co/docs/transformers/index',n:'HuggingFace Transformers Docs',c:'doc'}]},
+ ],wknd:'Image classifier: fine-tune EfficientNet. Deploy with Gradio on HuggingFace Spaces. Serve via FastAPI.'},
+ {w:'Week 17',t:'Transformers architecture — the most important week',h:'10 hrs',days:[
+  {d:'Mon',n:'Attention mechanism: queries, keys, values, scaled dot-product, attention weights. Visual intuition.',r:[{l:'https://www.youtube.com/watch?v=iDulhoQ2pro',n:'3Blue1Brown – Attention in Transformers (visual)',c:'yt'}]},
+  {d:'Tue',n:'Multi-head attention, positional encoding, layer normalisation, residual connections',r:[{l:'https://jalammar.github.io/illustrated-transformer/',n:'Jay Alammar – Illustrated Transformer',c:'art'},{l:'https://jalammar.github.io/illustrated-bert/',n:'Jay Alammar – Illustrated BERT',c:'art'}]},
+  {d:'Wed',n:'Encoder-decoder. BERT (encoder-only) vs GPT (decoder-only). Pre-training vs fine-tuning.',r:[{l:'https://huggingface.co/learn/llm-course/chapter1/1',n:'HuggingFace LLM Course Ch.1',c:'course'}]},
+  {d:'Thu',n:'Build character-level GPT from scratch: Karpathy nanoGPT. The single best DL tutorial ever made.',r:[{l:'https://www.youtube.com/watch?v=kCc8FmEb1nY',n:'Karpathy – Build GPT from Scratch (2h video)',c:'yt'},{l:'https://github.com/karpathy/nanoGPT',n:'nanoGPT GitHub',c:'gh'}]},
+  {d:'Fri',n:'Tokenisation from scratch: BPE algorithm, WordPiece, SentencePiece. How LLMs turn text into numbers.',r:[{l:'https://www.youtube.com/watch?v=zduSFxRajkE',n:'Karpathy – Tokeniser from Scratch',c:'yt'}]},
+ ],wknd:'Complete nanoGPT tutorial + code it locally. Don\'t skip this. It makes everything in Phase 5 click.'},
+ {w:'Week 18',t:'HuggingFace · fine-tuning · LoRA/QLoRA',h:'9 hrs',days:[
+  {d:'Mon',n:'HuggingFace Transformers: AutoModel, AutoTokenizer, pipeline API, model cards, Hub upload',r:[{l:'https://huggingface.co/learn/llm-course/chapter2/1',n:'HuggingFace LLM Course Ch.2',c:'course'}]},
+  {d:'Tue',n:'Datasets library: load, preprocess, tokenise, map functions, DataCollators',r:[{l:'https://huggingface.co/docs/datasets/index',n:'HuggingFace Datasets Docs',c:'doc'}]},
+  {d:'Wed',n:'Fine-tuning BERT/DistilBERT with Trainer API + LR scheduler + warmup + evaluation loop',r:[{l:'https://huggingface.co/learn/llm-course/chapter3/1',n:'HuggingFace LLM Course Ch.3',c:'course'}]},
+  {d:'Thu',n:'PEFT: LoRA theory (low-rank decomposition, rank r, alpha, target_modules). QLoRA = LoRA + 4-bit quantisation.',r:[{l:'https://huggingface.co/docs/peft/index',n:'HuggingFace PEFT Docs',c:'doc'},{l:'https://arxiv.org/abs/2106.09685',n:'LoRA Paper (arXiv)',c:'art'}]},
+  {d:'Fri',n:'Unsloth: fast QLoRA on free Colab T4 GPU. Fine-tune Llama-3 8B in under 1 hour.',r:[{l:'https://github.com/unslothai/unsloth',n:'Unsloth GitHub — fast QLoRA',c:'gh'}]},
+ ],wknd:'Project 4a: Fine-tune DistilBERT on custom classification task. Push to HuggingFace Hub with model card.'},
+ {w:'Week 19',t:'NLP tasks · sentence embeddings · multimodal',h:'8 hrs',days:[
+  {d:'Mon',n:'NLP tasks via HuggingFace: NER, QA, summarisation, zero-shot classification, translation',r:[{l:'https://huggingface.co/learn/llm-course/chapter5/1',n:'HuggingFace LLM Course Ch.5',c:'course'}]},
+  {d:'Tue',n:'Sentence transformers: semantic similarity, bi-encoder vs cross-encoder, MTEB benchmark',r:[{l:'https://www.sbert.net/',n:'Sentence Transformers Docs',c:'doc'}]},
+  {d:'Wed',n:'Evaluation: BLEU, ROUGE, BERTScore, perplexity. LLM-as-judge pattern.',r:[{l:'https://huggingface.co/docs/evaluate',n:'HuggingFace Metrics Guide',c:'doc'}]},
+  {d:'Thu',n:'Multimodal intro: CLIP, GPT-4o vision API, Whisper (STT), Stable Diffusion basics',r:[{l:'https://github.com/openai/whisper',n:'OpenAI Whisper Repo',c:'gh'},{l:'https://www.deeplearning.ai/short-courses/open-source-models-hugging-face/',n:'DeepLearning.AI – HF Models (free)',c:'course'}]},
+  {d:'Fri',n:'Explore HuggingFace Hub: find 3 models for your target job domain. Test with pipeline API.',r:[]},
+ ],wknd:'Build Project 4b: inference API for fine-tuned model via FastAPI (from Phase 2). Async endpoint + Redis cache.'},
+ {w:'Week 20',t:'Phase 4 review + Project 4 finish',h:'6 hrs',days:[
+  {d:'Mon',n:'Phase 4 review: explain attention mechanism and BERT vs GPT to yourself out loud.',r:[]},
+  {d:'Tue',n:'Finish Project 4: fine-tuned model + FastAPI inference + PostgreSQL logging + Redis cache.',r:[]},
+  {d:'Wed',n:'Write Project 4 README. Record demo. Push to HuggingFace Hub.',r:[]},
+  {d:'Thu',n:'Preview Phase 5: skim LangChain docs + Anthropic API docs. What does RAG look like?',r:[{l:'https://python.langchain.com/docs/',n:'LangChain Python Docs',c:'doc'}]},
+  {d:'Fri',n:'Push everything. You now have 4 projects. Next phase is the most market-relevant.',r:[]},
+ ],wknd:'Rest. Week 21 starts the Gen AI phase — the highest-leverage part of the roadmap.'},
+]},
+
+// ── PHASE 5 ──────────────────────────────────────────────────────
+{id:'p5',no:'Phase 5',chip:'LLMs · RAG · Gen AI',color:'var(--p5)',cb:'rgba(232,95,61,.07)',cc:'rgba(232,95,61,.25)',wk:'21–27',hr:'~100 hrs',banner:null,
+weeks:[
+ {w:'Week 21',t:'LLM APIs · prompt engineering · streaming',h:'9 hrs',days:[
+  {d:'Mon',n:'LLM landscape: GPT-4o, Claude 3.5/4, Gemini, Llama, Mistral — tradeoffs, benchmarks, pricing',r:[{l:'https://artificialanalysis.ai/',n:'Artificial Analysis – LLM Benchmarks',c:'art'}]},
+  {d:'Tue',n:'OpenAI API: chat completions, roles, streaming (SSE), token counting, async with httpx',r:[{l:'https://platform.openai.com/docs/guides/chat',n:'OpenAI Chat API Docs',c:'doc'},{l:'https://platform.openai.com/docs/api-reference/streaming',n:'OpenAI Streaming Docs',c:'doc'}]},
+  {d:'Wed',n:'Anthropic API: Claude messages, streaming, tool use, vision, long context. Context window management strategies.',r:[{l:'https://docs.anthropic.com/en/api/getting-started',n:'Anthropic API Docs',c:'doc'},{l:'https://github.com/anthropics/anthropic-sdk-python',n:'Anthropic Python SDK',c:'gh'}]},
+  {d:'Thu',n:'Prompt engineering: zero-shot, few-shot, chain-of-thought, system prompts, ReAct, self-consistency',r:[{l:'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/',n:'DeepLearning.AI – Prompt Engineering (free)',c:'course'}]},
+  {d:'Fri',n:'Structured output: JSON mode, function calling, tool use schemas. Streaming FastAPI endpoint with SSE.',r:[{l:'https://platform.openai.com/docs/guides/function-calling',n:'OpenAI Function Calling Docs',c:'doc'}]},
+ ],wknd:'Build streaming chat API: FastAPI + async OpenAI/Anthropic stream + React frontend consuming SSE. Store messages in PostgreSQL (Phase 2 skills!).'},
+ {w:'Week 22',t:'RAG fundamentals · all chunking strategies',h:'10 hrs',days:[
+  {d:'Mon',n:'RAG architecture: load → chunk → embed → store → retrieve → generate. Why RAG beats fine-tuning for dynamic knowledge.',r:[{l:'https://docs.llamaindex.ai/en/stable/understanding/rag/',n:'LlamaIndex – RAG Introduction',c:'doc'}]},
+  {d:'Tue',n:'Document loaders: PDF, DOCX, HTML, web scraping, databases. LangChain document loaders.',r:[{l:'https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/',n:'DeepLearning.AI – LangChain (free)',c:'course'}]},
+  {d:'Wed',n:'Chunking strategies: fixed-size, recursive character splitting, sentence-level. Trade-offs and when to use each.',r:[{l:'https://www.pinecone.io/learn/chunking-strategies/',n:'Pinecone – Chunking Strategies Guide',c:'art'}]},
+  {d:'Thu',n:'Embeddings: text-embedding-3-small, BGE-M3, sentence-transformers. Store in Chroma (local) or Qdrant.',r:[{l:'https://docs.trychroma.com/',n:'Chroma Docs',c:'doc'},{l:'https://qdrant.tech/documentation/',n:'Qdrant Docs',c:'doc'}]},
+  {d:'Fri',n:'First RAG app end-to-end. Persist chat history in PostgreSQL, cache embeddings in Redis.',r:[]},
+ ],wknd:'Build basic RAG app: load PDF, chunk, embed, store in Qdrant, query with Claude. Store sessions in PostgreSQL.'},
+ {w:'Week 23',t:'Advanced RAG · hybrid search · re-ranking · evaluation',h:'10 hrs',days:[
+  {d:'Mon',n:'Semantic chunking: split where cosine similarity drops. Parent-child (hierarchical) chunking.',r:[{l:'https://www.llamaindex.ai/blog/evaluating-the-ideal-chunk-size-for-a-rag-system-using-llamaindex-6207e5d3fec5',n:'LlamaIndex – Chunk Size Eval Blog',c:'art'},{l:'https://docs.llamaindex.ai/en/stable/examples/retrievers/auto_merging_retriever/',n:'LlamaIndex – Auto-Merging Retriever',c:'doc'}]},
+  {d:'Tue',n:'Hybrid search: BM25 (keyword) + dense vector with Reciprocal Rank Fusion. Better than either alone.',r:[{l:'https://www.pinecone.io/learn/hybrid-search-intro/',n:'Pinecone – Hybrid Search Guide',c:'art'}]},
+  {d:'Wed',n:'Re-ranking: Cohere reranker, cross-encoder after initial retrieval. HyDE + query rewriting.',r:[{l:'https://docs.cohere.com/reference/rerank',n:'Cohere Reranker Docs',c:'doc'},{l:'https://arxiv.org/abs/2212.10496',n:'HyDE Paper (arXiv)',c:'art'}]},
+  {d:'Thu',n:'RAGAS evaluation: faithfulness, context precision, context recall, answer relevance. Run on your RAG app.',r:[{l:'https://docs.ragas.io/',n:'RAGAS Docs',c:'doc'}]},
+  {d:'Fri',n:'LangFuse: trace every RAG step. Cost + latency dashboards. Semantic caching for repeated queries.',r:[{l:'https://langfuse.com/docs',n:'LangFuse Docs',c:'doc'}]},
+ ],wknd:'Upgrade RAG app: hybrid search + re-ranking + RAGAS eval + LangFuse tracing. Document score improvements.'},
+ {w:'Week 24',t:'LangChain · LlamaIndex · Guardrails · Contextual Retrieval',h:'9 hrs',days:[
+  {d:'Mon',n:'LangChain LCEL: chains, runnables, parallel execution, custom chains, LangSmith tracing',r:[{l:'https://python.langchain.com/docs/concepts/lcel/',n:'LangChain LCEL Docs',c:'doc'}]},
+  {d:'Tue',n:'LlamaIndex query engines, routers, query fusion. When LlamaIndex > LangChain for RAG.',r:[{l:'https://docs.llamaindex.ai/en/stable/understanding/querying/',n:'LlamaIndex Querying Guide',c:'doc'}]},
+  {d:'Wed',n:'Contextual retrieval (Anthropic): prepend document summary to each chunk before embedding. Dramatic recall improvement.',r:[{l:'https://www.anthropic.com/news/contextual-retrieval',n:'Anthropic – Contextual Retrieval Blog',c:'art'}]},
+  {d:'Thu',n:'Guardrails AI: output validation, PII detection, toxic content filtering. Prompt injection defence.',r:[{l:'https://www.guardrailsai.com/docs',n:'Guardrails AI Docs',c:'doc'}]},
+  {d:'Fri',n:'Background tasks for AI: Celery workers for slow LLM jobs (Phase 2 payoff). Never block the API.',r:[]},
+ ],wknd:'Add Celery async LLM processing + guardrails + contextual retrieval to your RAG app.'},
+ {w:'Week 25',t:'AI Agents · ReAct · LangGraph · memory',h:'10 hrs',days:[
+  {d:'Mon',n:'Agent fundamentals: ReAct pattern — Reason → Act → Observe loop. When agents > single LLM calls.',r:[{l:'https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/',n:'DeepLearning.AI – AI Agents in LangGraph (free)',c:'course'}]},
+  {d:'Tue',n:'Tool use: Tavily web search, code execution, calculator, custom DB tools (Phase 2 payoff!).',r:[{l:'https://www.deeplearning.ai/short-courses/functions-tools-agents-langchain/',n:'DeepLearning.AI – Functions, Tools & Agents (free)',c:'course'}]},
+  {d:'Wed',n:'LangGraph: nodes, edges, state management, conditional transitions, human-in-the-loop, streaming',r:[{l:'https://langchain-ai.github.io/langgraph/',n:'LangGraph Official Docs',c:'doc'}]},
+  {d:'Thu',n:'Agent memory: Redis (short-term scratchpad) + PostgreSQL (long-term history) — use your Phase 2 stack!',r:[{l:'https://lilianweng.github.io/posts/2023-06-23-agent/',n:'Lilian Weng – LLM Autonomous Agents (must-read)',c:'art'}]},
+  {d:'Fri',n:'Multi-agent: orchestrator + worker pattern, supervisor, CrewAI, AutoGen overview',r:[{l:'https://langchain-ai.github.io/langgraph/concepts/multi_agent/',n:'LangGraph Multi-Agent Docs',c:'doc'}]},
+ ],wknd:'Build agent: Tavily search + code exec + RAG retriever. Persist memory in Redis (short) + PostgreSQL (long).'},
+ {w:'Week 26',t:'MCP — Model Context Protocol',h:'9 hrs',days:[
+  {d:'Mon',n:'MCP architecture: Host ↔ Client ↔ Server. Tools vs Resources vs Prompts. Why it\'s the USB-C for AI.',r:[{l:'https://modelcontextprotocol.io/introduction',n:'MCP Official Docs',c:'doc'},{l:'https://anthropic.skilljar.com/introduction-to-model-context-protocol',n:'Anthropic MCP Course (free)',c:'course'}]},
+  {d:'Tue',n:'MCP Python SDK: install, create server, register tools with @mcp.tool(), test with MCP Inspector',r:[{l:'https://modelcontextprotocol.io/docs/develop/build-server',n:'MCP – Build a Server (official tutorial)',c:'doc'}]},
+  {d:'Wed',n:'Build weather MCP server (official tutorial). Connect to Claude Desktop. Watch it work.',r:[{l:'https://github.com/modelcontextprotocol/servers',n:'MCP Reference Servers GitHub',c:'gh'}]},
+  {d:'Thu',n:'Expose your PostgreSQL database as MCP resources. Expose your Redis cache. Connect to Claude.',r:[{l:'https://towardsdatascience.com/model-context-protocol-mcp-tutorial-build-your-first-mcp-server-in-6-steps/',n:'TDS – Build MCP Server in 6 Steps',c:'art'}]},
+  {d:'Fri',n:'MCP transports: stdio (local) vs HTTP+SSE (remote). Security + auth for remote MCP servers.',r:[{l:'https://github.com/microsoft/mcp-for-beginners',n:'Microsoft – MCP for Beginners Curriculum (free)',c:'gh'}]},
+ ],wknd:'Build MCP server wrapping your RAG app + PostgreSQL. Test with Claude Desktop. This is a 2025 differentiator.'},
+ {w:'Week 27',t:'Fine-tuning LoRA/QLoRA · DSPy · Project 5',h:'9 hrs',days:[
+  {d:'Mon',n:'Fine-tune vs RAG vs prompt engineering: the decision framework. When each wins.',r:[{l:'https://www.anyscale.com/blog/fine-tuning-is-for-form-not-facts',n:'Anyscale – Fine-tuning is for Form, Not Facts',c:'art'}]},
+  {d:'Tue',n:'QLoRA + Unsloth: fine-tune Llama-3 8B on free Colab T4. Instruction tuning dataset creation.',r:[{l:'https://www.deeplearning.ai/short-courses/finetuning-large-language-models/',n:'DeepLearning.AI – Fine-tuning LLMs (free)',c:'course'},{l:'https://github.com/unslothai/unsloth',n:'Unsloth GitHub',c:'gh'}]},
+  {d:'Wed',n:'DPO (Direct Preference Optimisation): aligning model to human preferences without RL.',r:[{l:'https://huggingface.co/blog/dpo-trl',n:'HuggingFace – DPO Blog',c:'art'}]},
+  {d:'Thu',n:'DSPy: programming LLMs with automatic prompt optimisation. Alternative to manual prompt engineering.',r:[{l:'https://dspy.ai/',n:'DSPy Docs',c:'doc'},{l:'https://github.com/stanfordnlp/dspy',n:'DSPy GitHub',c:'gh'}]},
+  {d:'Fri',n:'Project 5 start: plan your production RAG app with full backend.',r:[]},
+ ],wknd:'Project 5: Production RAG app — FastAPI + PostgreSQL (chat history) + Redis (cache) + Qdrant (vectors) + LangFuse + RAGAS eval. React frontend with streaming. Full backend from Phase 2.'},
+]},
+
+// ── PHASE 6 ──────────────────────────────────────────────────────
+{id:'p6',no:'Phase 6',chip:'Deploy & Cloud',color:'var(--p6)',cb:'rgba(46,196,170,.07)',cc:'rgba(46,196,170,.25)',wk:'28–29',hr:'~60 hrs',banner:null,
+weeks:[
+ {w:'Week 28',t:'Azure cloud · CI/CD · production monitoring',h:'10 hrs',days:[
+  {d:'Mon',n:'Azure OpenAI Service: deploy GPT-4o endpoint. Azure AI Search: set up RAG index.',r:[{l:'https://learn.microsoft.com/en-us/azure/ai-services/openai/',n:'Azure OpenAI Docs',c:'doc'},{l:'https://learn.microsoft.com/en-us/azure/search/',n:'Azure AI Search Docs',c:'doc'}]},
+  {d:'Tue',n:'Docker multi-stage builds for production. Full docker-compose: FastAPI + PostgreSQL + Redis + MongoDB + Celery.',r:[{l:'https://www.youtube.com/watch?v=3c-iBn73dDE',n:'TechWorld with Nana – Docker',c:'yt'}]},
+  {d:'Wed',n:'Azure Container Apps: deploy full stack. Environment variables from Key Vault. Health checks.',r:[{l:'https://learn.microsoft.com/en-us/azure/container-apps/',n:'Azure Container Apps Docs',c:'doc'}]},
+  {d:'Thu',n:'GitHub Actions CI/CD: lint → test → build Docker → deploy to Azure on push to main',r:[{l:'https://docs.github.com/en/actions',n:'GitHub Actions Docs',c:'doc'}]},
+  {d:'Fri',n:'LangFuse production dashboards: cost budgets, latency P99, alert on regressions. OWASP LLM Top 10.',r:[{l:'https://owasp.org/www-project-top-10-for-large-language-model-applications/',n:'OWASP LLM Top 10',c:'art'}]},
+ ],wknd:'Deploy Project 5 to Azure Container Apps with full CI/CD pipeline. Live URL.'},
+ {w:'Week 29',t:'Project 6 (Agent + MCP) · Capstone project start',h:'10 hrs',days:[
+  {d:'Mon',n:'Project 6 (Agent + MCP): plan architecture. LangGraph multi-step agent + MCP server wrapping your DB.',r:[]},
+  {d:'Tue',n:'Build agent: Tavily search + code exec + MCP server (PostgreSQL + Redis exposed). Multi-step planning.',r:[]},
+  {d:'Wed',n:'Deploy agent to Azure. Add JWT auth from Phase 2. Add LangFuse tracing.',r:[]},
+  {d:'Thu',n:'Capstone (Project 7): system design — pick a domain (legal, HR, finance), draw architecture: RAG + agent + MCP + PostgreSQL + Redis + streaming + auth.',r:[]},
+  {d:'Fri',n:'Capstone: set up repo, scaffold FastAPI backend, connect PostgreSQL + Redis, get base RAG pipeline running.',r:[]},
+ ],wknd:'Finish capstone. Deploy. Record 2-min demo. This is your interview centrepiece.'},
+]},
+
+// ── PHASE 7 ──────────────────────────────────────────────────────
+{id:'p7',no:'Phase 7',chip:'Portfolio & Jobs',color:'var(--p7)',cb:'rgba(122,136,153,.07)',cc:'rgba(122,136,153,.25)',wk:'30',hr:'~60 hrs',banner:null,
+weeks:[
+ {w:'Week 30',t:'Portfolio polish · interview prep · applications',h:'10 hrs',days:[
+  {d:'Mon',n:'Clean READMEs for all 7 projects: problem → solution → stack → results. Consistent format.',r:[{l:'https://www.makeareadme.com/',n:'makeareadme.com – README Template',c:'art'}]},
+  {d:'Tue',n:'Portfolio website in React: live demos, GitHub links, skills. Your React background shines here.',r:[]},
+  {d:'Wed',n:'System design interview: design a production RAG system end-to-end (whiteboard). Practice out loud.',r:[{l:'https://www.hiredintech.com/system-design/',n:'Hired in Tech – System Design',c:'art'}]},
+  {d:'Thu',n:'SQL interview prep: complex queries, window functions, EXPLAIN ANALYZE. Python medium LeetCode.',r:[{l:'https://leetcode.com/problemset/database/',n:'LeetCode – SQL Problems',c:'art'},{l:'https://leetcode.com/',n:'LeetCode – Python Problems',c:'art'}]},
+  {d:'Fri',n:'Apply to 10 AI Engineer roles. Startups first. Update LinkedIn with AI skills. Write post with project links.',r:[{l:'https://wellfound.com/',n:'Wellfound – Startup Jobs',c:'art'},{l:'https://www.naukri.com/',n:'Naukri.com – India AI Jobs',c:'art'}]},
+ ],wknd:'Keep building. Keep applying. Side projects every 2 weeks. You\'re ready.'},
+]},
+];
+
+const SKILLS={
+ p1:[
+  {t:'Python OOP, decorators, generators',l:'e'},{t:'Type hints (str, List, Optional, TypeVar)',l:'e'},{t:'Pydantic v2 models + validators',l:'e'},
+  {t:'.env + secrets management',l:'e'},{t:'async/await + asyncio.gather',l:'m'},{t:'Git + GitHub workflow',l:'e'},
+  {t:'NumPy arrays + broadcasting',l:'e'},{t:'Pandas DataFrames + groupby + merge',l:'e'},{t:'EDA workflow end-to-end',l:'e'},
+  {t:'Linear algebra intuition',l:'m'},{t:'Gradient descent intuition',l:'m'},{t:'Cross-entropy loss from first principles',l:'m'},
+ ],
+ p2:[
+  {t:'FastAPI: async endpoints + Pydantic models',l:'m'},{t:'Dependency injection + service layer pattern',l:'m'},
+  {t:'REST API design + error handling',l:'m'},{t:'pytest + TestClient + fixtures',l:'m'},
+  {t:'SQL: joins, CTEs, window functions',l:'m'},{t:'PostgreSQL: EXPLAIN ANALYZE + indexes',l:'m'},
+  {t:'Database design + normalisation',l:'m'},{t:'SQLAlchemy 2.0 async ORM + asyncpg',l:'m'},
+  {t:'Alembic migrations',l:'m'},{t:'MongoDB (PyMongo async) + Beanie ODM',l:'m'},
+  {t:'Redis: caching patterns + TTL + semantic cache',l:'m'},{t:'Celery background tasks + retries',l:'h'},
+  {t:'JWT auth + OAuth2 + API keys',l:'m'},{t:'Rate limiting + circuit breakers',l:'m'},
+  {t:'Thin endpoints + thick services architecture',l:'m'},{t:'Docker + docker-compose full stack',l:'m'},
+  {t:'Connection pooling (asyncpg pool_size)',l:'h'},{t:'Async parallel calls (asyncio.gather)',l:'m'},
+ ],
+ p3:[
+  {t:'Scikit-learn pipelines + ColumnTransformer',l:'e'},{t:'Linear + logistic regression',l:'e'},
+  {t:'Decision trees + random forests',l:'e'},{t:'XGBoost + LightGBM + Optuna',l:'m'},
+  {t:'Model evaluation (F1, AUC, confusion matrix)',l:'m'},{t:'Feature engineering + encoding',l:'m'},
+  {t:'Cross-validation + data leakage prevention',l:'m'},{t:'Clustering + PCA + t-SNE',l:'m'},
+  {t:'MLflow experiment tracking',l:'m'},{t:'Serve ML via FastAPI + PostgreSQL + Redis',l:'h'},
+ ],
+ p4:[
+  {t:'Neural net forward/backward (from scratch)',l:'m'},{t:'PyTorch training loop + autograd',l:'m'},
+  {t:'Batch norm + dropout + overfitting prevention',l:'m'},{t:'LR scheduling + warmup strategies',l:'m'},
+  {t:'CNN + transfer learning (ResNet/EfficientNet)',l:'m'},{t:'Transformer attention mechanism',l:'h'},
+  {t:'BERT vs GPT architecture differences',l:'h'},{t:'Build GPT from scratch (nanoGPT)',l:'h'},
+  {t:'Tokenisation (BPE, WordPiece)',l:'m'},{t:'HuggingFace Trainer API + fine-tuning',l:'m'},
+  {t:'LoRA / QLoRA / PEFT',l:'h'},{t:'Sentence transformers + dense embeddings',l:'m'},
+ ],
+ p5:[
+  {t:'OpenAI + Anthropic streaming API (SSE)',l:'e'},{t:'Prompt engineering (CoT, few-shot, ReAct)',l:'e'},
+  {t:'Context window management strategies',l:'m'},{t:'Basic + advanced RAG pipeline',l:'m'},
+  {t:'All chunking strategies',l:'m'},{t:'Hybrid search (BM25 + dense + RRF)',l:'m'},
+  {t:'Re-ranking (Cohere, cross-encoder)',l:'m'},{t:'HyDE + query rewriting + multi-query',l:'h'},
+  {t:'LangChain LCEL chains',l:'m'},{t:'LlamaIndex query engines',l:'m'},
+  {t:'LangFuse observability + semantic caching',l:'m'},{t:'Contextual retrieval',l:'h'},
+  {t:'Guardrails AI + LLM-as-judge',l:'m'},{t:'ReAct agent + LangGraph stateful agents',l:'h'},
+  {t:'Multi-agent orchestration',l:'h'},{t:'Agent memory (Redis short + PostgreSQL long)',l:'m'},
+  {t:'MCP architecture + build MCP server',l:'h'},{t:'Expose DB/cache via MCP resources',l:'h'},
+  {t:'RAGAS evaluation',l:'m'},{t:'Celery async LLM background tasks',l:'m'},
+  {t:'Fine-tune vs RAG decision framework',l:'e'},{t:'DSPy basics',l:'h'},
+ ],
+ p6:[
+  {t:'Azure OpenAI + AI Search integration',l:'m'},{t:'Docker multi-stage production builds',l:'m'},
+  {t:'Azure Container Apps deployment',l:'h'},{t:'GitHub Actions CI/CD for AI apps',l:'m'},
+  {t:'LangFuse production monitoring + alerts',l:'m'},{t:'Full AI system end-to-end deployed',l:'h'},
+ ],
+ p7:[
+  {t:'7 projects on GitHub with READMEs',l:'e'},{t:'Portfolio website live',l:'e'},
+  {t:'System design: production RAG + agent',l:'h'},{t:'SQL interview questions (medium)',l:'m'},
+  {t:'Python coding interviews (medium)',l:'m'},{t:'STAR behavioural answers ready',l:'e'},
+  {t:'10+ applications submitted',l:'e'},{t:'LinkedIn updated + AI post published',l:'e'},
+ ],
+};
+
+const PROJECTS=[
+ {n:'P1',t:'EDA + Gradient Descent from Scratch',m:'Month 1',d:'Full EDA on Titanic/House Prices dataset. Implement gradient descent in NumPy from scratch. Visualise convergence curve. 5 data insights.',tags:['NumPy','Pandas','Matplotlib'],del:'Kaggle notebook + GitHub repo',s:0,cls:''},
+ {n:'P2',t:'Production Backend — Full Stack API',m:'Month 2',d:'CRUD REST API: FastAPI + PostgreSQL + SQLAlchemy 2.0 async + asyncpg + Alembic + Redis caching + MongoDB logs + Celery background tasks + JWT auth + rate limiting + Docker compose. Full pytest suite.',tags:['FastAPI','PostgreSQL','asyncpg','SQLAlchemy','Redis','MongoDB','Celery','JWT','Docker'],del:'Fully tested API + docker-compose + architecture README',s:2,cls:'star'},
+ {n:'P3',t:'ML API Pipeline',m:'Month 3',d:'Train with scikit-learn + XGBoost, track with MLflow, serve predictions via FastAPI, store results in PostgreSQL, cache with Redis. End-to-end with proper error handling.',tags:['scikit-learn','XGBoost','MLflow','FastAPI','PostgreSQL','Redis'],del:'Live inference API + MLflow tracking dashboard',s:0,cls:''},
+ {n:'P4',t:'Fine-tuned NLP Model',m:'Month 4',d:'Fine-tune DistilBERT/Llama-3 (QLoRA) on a custom task. Serve via async FastAPI endpoint. Cache predictions in Redis. Push model to HuggingFace Hub with model card.',tags:['PyTorch','HuggingFace','LoRA/QLoRA','FastAPI','Redis'],del:'Model on HuggingFace Hub + inference API',s:1,cls:'star'},
+ {n:'P5',t:'Production RAG App ⭐⭐',m:'Month 5',d:'Advanced RAG: semantic/hierarchical chunking + hybrid search + re-ranking + RAGAS eval + LangFuse tracing + guardrails. FastAPI backend + PostgreSQL (chat history) + Redis (semantic cache) + Qdrant (vectors). React frontend with streaming.',tags:['LangChain','Qdrant','RAGAS','LangFuse','React','FastAPI','PostgreSQL','Redis'],del:'Live deployed app + RAGAS eval report',s:2,cls:'star'},
+ {n:'P6',t:'AI Agent + MCP Server ⭐⭐',m:'Month 6',d:'LangGraph multi-step agent with: Tavily web search, code execution, custom MCP server (exposes PostgreSQL + Redis via tools/resources). Persistent memory (Redis short-term + PostgreSQL long-term). Deployed to Azure.',tags:['LangGraph','MCP','PostgreSQL','Redis','Azure','JWT'],del:'Live agent + MCP server + Claude Desktop integration',s:2,cls:'star'},
+ {n:'P7',t:'Full AI Product Capstone ⭐⭐⭐',m:'Month 7',d:'Everything: RAG + agent + MCP + PostgreSQL + Redis + MongoDB + streaming + multimodal + LangFuse + guardrails + CI/CD + Azure. JWT auth from Phase 2. Pick a real domain (legal, HR, finance, medical). Something a company pays for.',tags:['All skills','Azure','LangFuse','Guardrails','React','FastAPI','PostgreSQL','Redis','MCP','Streaming'],del:'Production-deployed full-stack AI product',s:3,cls:'cap'},
+];
+
+const PERF_PATTERNS=[
+ {icon:'⚡',title:'Async patterns for AI',items:[
+  'async/await for all I/O: DB queries, LLM calls, Redis ops',
+  'asyncio.gather() to parallelise LLM + DB calls simultaneously',
+  'Never block the event loop — no time.sleep(), no sync requests in async context',
+  'Celery workers for long LLM jobs (never inline in the API request)',
+  'Background tasks (FastAPI) for logging, analytics, follow-up summarisation',
+  {t:'Streaming SSE from OpenAI/Anthropic → FastAPI → React frontend',hot:true},
+ ]},
+ {icon:'🗄️',title:'Database performance',items:[
+  'asyncpg connection pooling: pool_size + max_overflow tuned to workload',
+  'PgBouncer: connection pooler that cuts latency from 50ms → 5ms (OpenAI uses this)',
+  'GIN indexes for JSONB fields, B-tree for foreign keys, partial indexes for filters',
+  'EXPLAIN ANALYZE to find slow queries before they hit production',
+  'SQLAlchemy lazy vs eager loading — avoid N+1 query problems',
+  {t:'Async SQLAlchemy + asyncpg: never block the event loop on DB queries',hot:true},
+ ]},
+ {icon:'📦',title:'Redis & caching strategy',items:[
+  'Cache-aside pattern: check Redis first, hit DB only on miss, write back to Redis',
+  'Semantic caching for LLM: cache by embedding similarity, not exact string match',
+  'Redis as agent scratchpad (short-term) + PostgreSQL as durable memory (long-term)',
+  'Embed Redis caching at the service layer, not the endpoint layer',
+  {t:'Semantic cache: similar queries return cached responses — cuts LLM API costs 40–70%',hot:true},
+  'TTL strategy: short for LLM responses (may be stale), long for static embeddings',
+ ]},
+ {icon:'🤖',title:'LLM backend architecture',items:[
+  {t:'Thin endpoints, thick services — all LLM logic in a service layer, not the route handler',hot:true},
+  'Prompt versioning as first-class: versioned prompts selectable at runtime',
+  'Context window management: map-reduce, sliding window, chunk compression',
+  'Structured outputs (JSON mode) reduce post-processing and validation failures',
+  'Retry with exponential backoff for LLM API calls — they fail more than you think',
+  'Separate fast-path (cached) from slow-path (LLM) in your API design',
+ ]},
+ {icon:'🔒',title:'Auth & API security',items:[
+  'JWT: short-lived access tokens (15 min) + long-lived refresh tokens (7 days)',
+  'Rate limiting per user+endpoint, not just global — prevents one user starving others',
+  'Circuit breakers on LLM API calls — fail fast before queue builds up',
+  'API key scoping: each key has permissions, TTL, and usage logs in PostgreSQL',
+  {t:'OWASP LLM Top 10: prompt injection, insecure output handling, excessive agency',hot:true},
+  'Never log raw LLM inputs/outputs to unencrypted storage — PII risk',
+ ]},
+ {icon:'📊',title:'Observability & cost control',items:[
+  {t:'LangFuse: trace every RAG step — retrieval latency, token count, cost, quality',hot:true},
+  'Token cost tracking in PostgreSQL: per-user, per-model, per-feature budgets',
+  'P99 latency monitoring — LLM tails are long, mean latency lies',
+  'Prometheus + Grafana for system metrics (CPU, memory, DB connections)',
+  'RAGAS evaluation in CI: fail the pipeline if context precision drops',
+  'A/B test prompt versions with LangFuse experiments before rollout',
+ ]},
+];
+
+const CONCEPTS=[
+ {t:'RAG & Chunking',i:'📄',items:['Fixed-size + recursive chunking','Semantic chunking (cosine drop)','Parent-child / hierarchical','Contextual retrieval (Anthropic)','Hybrid search (BM25 + dense + RRF)','Re-ranking (Cohere, cross-encoder)','HyDE + query rewriting + multi-query','RAGAS evaluation framework','DeepEval + LangFuse tracing','Semantic caching (Redis + embeddings)']},
+ {t:'Agents & Agentic AI',i:'🤖',items:['ReAct: Reason + Act + Observe loop','Tool use + function calling','Redis (short) + PostgreSQL (long) memory','LangGraph stateful agent graphs','Multi-agent orchestration (CrewAI)','Planning agents (task decomposition)','Human-in-the-loop patterns','Celery for async agent tasks']},
+ {t:'MCP — Model Context Protocol',i:'🔌',items:['MCP: Host ↔ Client ↔ Server architecture','Tools (model-controlled functions)','Resources (app-controlled data)','Prompts (user-controlled templates)','STDIO vs HTTP+SSE transport','Build MCP server (Python SDK)','Expose PostgreSQL via MCP resources','Deploy remote MCP server to cloud']},
+ {t:'Gen AI Stack',i:'🏗',items:['LangChain LCEL chains + runnables','LlamaIndex query engines + routers','DSPy: programmatic prompt optimisation','LangFuse: full observability','Guardrails AI: output validation','LLM-as-judge evaluation pattern','Token cost budgets + alerts','Prompt versioning + A/B testing']},
+ {t:'Fine-tuning & PEFT',i:'🔧',items:['Fine-tune vs RAG decision framework','LoRA: low-rank adapter training','QLoRA: LoRA + 4-bit quantisation','Instruction tuning on custom data','DPO: Direct Preference Optimisation','Unsloth: fast QLoRA on free GPU','LR scheduling + warmup for fine-tuning','Evaluate with BLEU, ROUGE, BERTScore']},
+ {t:'Multimodal & Frontier',i:'🎨',items:['GPT-4o / Claude vision APIs','Whisper STT (local + API)','Image generation (DALL-E, Diffusers)','Streaming SSE for all LLM outputs','Document AI + OCR with LLM','Voice AI apps (STT + TTS pipeline)','Multimodal RAG (images + text)','Context window management strategies']},
+];
+
+const RESOURCES=[
+ {t:'YouTube (Free)',c:'#fb923c',items:[{n:'Karpathy – Neural Networks: Zero to Hero',u:'https://karpathy.ai/zero-to-hero.html'},{n:'Karpathy – Build GPT from Scratch (2h)',u:'https://www.youtube.com/watch?v=kCc8FmEb1nY'},{n:'3Blue1Brown – Linear Algebra + Calculus',u:'https://www.youtube.com/@3blue1brown'},{n:'StatQuest with Josh Starmer',u:'https://www.youtube.com/@statquest'},{n:'freeCodeCamp – SQL Full Course (4hrs)',u:'https://www.youtube.com/watch?v=HXV3zeQKqGY'},{n:'TechWorld with Nana – Docker',u:'https://www.youtube.com/watch?v=3c-iBn73dDE'}]},
+ {t:'Free Courses',c:'#9f7af5',items:[{n:'fast.ai – Practical Deep Learning',u:'https://course.fast.ai/'},{n:'HuggingFace LLM Course',u:'https://huggingface.co/learn/llm-course/chapter1/1'},{n:'Anthropic MCP Course',u:'https://anthropic.skilljar.com/introduction-to-model-context-protocol'},{n:'DeepLearning.AI – Prompt Engineering',u:'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/'},{n:'DeepLearning.AI – LangChain',u:'https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/'},{n:'DeepLearning.AI – AI Agents LangGraph',u:'https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/'},{n:'DeepLearning.AI – Fine-tuning LLMs',u:'https://www.deeplearning.ai/short-courses/finetuning-large-language-models/'},{n:'Kaggle Learn (all micro-courses)',u:'https://www.kaggle.com/learn'}]},
+ {t:'Official Docs',c:'#3ecf7a',items:[{n:'FastAPI Official Tutorial',u:'https://fastapi.tiangolo.com/tutorial/'},{n:'SQLAlchemy 2.0 Async ORM',u:'https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html'},{n:'Alembic Tutorial',u:'https://alembic.sqlalchemy.org/en/latest/tutorial.html'},{n:'PyMongo Async Driver (new)',u:'https://www.mongodb.com/docs/languages/python/pymongo-driver/current/'},{n:'Redis Getting Started',u:'https://redis.io/docs/latest/get-started/'},{n:'Celery Docs',u:'https://docs.celeryq.dev/'},{n:'PyTorch Tutorials',u:'https://pytorch.org/tutorials/'},{n:'MCP Official Docs',u:'https://modelcontextprotocol.io/introduction'}]},
+ {t:'GitHub Repos',c:'#7a8899',items:[{n:'Karpathy – nanoGPT',u:'https://github.com/karpathy/nanoGPT'},{n:'Karpathy – micrograd',u:'https://github.com/karpathy/micrograd'},{n:'FastAPI Best Practices',u:'https://github.com/zhanymkanov/fastapi-best-practices'},{n:'Unsloth – fast QLoRA',u:'https://github.com/unslothai/unsloth'},{n:'MCP Reference Servers',u:'https://github.com/modelcontextprotocol/servers'},{n:'Microsoft – MCP for Beginners',u:'https://github.com/microsoft/mcp-for-beginners'},{n:'LangFuse',u:'https://github.com/langfuse/langfuse'}]},
+ {t:'Must-Read Articles',c:'#4d9ff0',items:[{n:'Jay Alammar – Illustrated Transformer',u:'https://jalammar.github.io/illustrated-transformer/'},{n:'Lilian Weng – LLM Autonomous Agents',u:'https://lilianweng.github.io/posts/2023-06-23-agent/'},{n:'Anthropic – Contextual Retrieval',u:'https://www.anthropic.com/news/contextual-retrieval'},{n:'Building LLM Apps with FastAPI (best practices)',u:'https://agentsarcade.com/blog/building-llm-apps-with-fastapi-best-practices'},{n:'Anyscale – Fine-tuning is for Form',u:'https://www.anyscale.com/blog/fine-tuning-is-for-form-not-facts'},{n:'OWASP LLM Top 10',u:'https://owasp.org/www-project-top-10-for-large-language-model-applications/'}]},
+ {t:'Practice & Jobs',c:'#f472b6',items:[{n:'Kaggle Competitions',u:'https://www.kaggle.com/competitions'},{n:'LeetCode (Python + SQL)',u:'https://leetcode.com/'},{n:'HuggingFace Discord',u:'https://huggingface.co/join/discord'},{n:'MLflow Docs',u:'https://mlflow.org/docs/latest/'},{n:'Wellfound – Startup AI Jobs',u:'https://wellfound.com/'},{n:'Naukri.com – India AI Jobs',u:'https://www.naukri.com/'}]},
+];
+
+const SALARY=[
+ {ph:'After Month 1',sk:'Python + math + dev tools',r:'—',note:'Foundation phase. Not applying yet.',pct:8},
+ {ph:'After Month 2',sk:'+ Full backend: FastAPI, PostgreSQL, Redis, auth',r:'10–18 LPA',note:'Backend developer roles open up. More capable than many junior backend devs.',pct:28},
+ {ph:'After Month 3–4',sk:'+ ML pipeline + deep learning + fine-tuning',r:'14–24 LPA',note:'ML/NLP Engineer, data engineer roles. Proper backend knowledge is rare here.',pct:52},
+ {ph:'After Month 5',sk:'+ LLMs, RAG, agents, MCP, LangChain',r:'24–36 LPA',note:'AI Engineer roles. Strong JD match. Your backend skills make you stand out.',pct:75},
+ {ph:'After Month 6–7',sk:'+ Deployed projects + full portfolio + MCP',r:'32–45+ LPA',note:'Target bracket. Full-stack AI Engineer. React + backend + AI is a rare and valued combo.',pct:96},
+];
+
+const SCHEDULE=[
+ {t:'Weekday — 1 hour',h:'1 hr/day',blocks:[{r:'0–15 min',a:'Review yesterday: 3-bullet summary of what stuck. Anki flashcards for key terms.'},{r:'15–50 min',a:'Core learning: video + docs + code in Jupyter or VS Code.'},{r:'50–60 min',a:'Write 3 bullets today. Note 1 thing you don\'t understand yet.'}]},
+ {t:'Saturday — Build day',h:'3–4 hrs',blocks:[{r:'0–60 min',a:'Deeper concept study: re-read docs, try variations, break things intentionally.'},{r:'1–4 hrs',a:'Project work: code the weekly project. Push a WIP commit to GitHub.'}]},
+ {t:'Sunday — Review + Preview',h:'3–4 hrs',blocks:[{r:'0–60 min',a:'Finish + polish the week\'s project. Write README. Push final commit.'},{r:'1–2 hrs',a:'Preview next week: skim docs, watch intro video, feel the shape of what\'s coming.'},{r:'2–4 hrs',a:'Explore: read one AI paper, one blog post, or a Kaggle notebook. Stay curious.'}]},
+ {t:'Free Resources Priority',h:'Zero cost',blocks:[{r:'Tier 1',a:'Karpathy + fast.ai + HuggingFace courses. These three alone cover 80% of what you need.'},{r:'Tier 2',a:'DeepLearning.AI free short courses (all the Gen AI ones are free).'},{r:'Tier 3',a:'Kaggle Learn + official docs + Real Python + StatQuest.'},{r:'Paid?',a:'At most one Udemy course (LangChain+LangGraph, ₹500–800 on sale). Everything else is free.'}]},
+];
+
+const TIPS=[
+ {t:'<strong>The backend phase is not optional.</strong> Every 30–40 LPA AI Engineer interview includes system design questions about databases, APIs, and caching. Phase 2 turns your AI code from a demo into a production system.'},
+ {t:'<strong>Async is not magic.</strong> If your prompts are bloated, your retrieval does full-table scans, and you rebuild embeddings on every request — async just lets you fail faster. Design for performance before you optimise concurrency.'},
+ {t:'<strong>Your React background is worth money.</strong> Most AI engineers can\'t build frontends. You can ship full-stack AI products solo — streaming chat UI, auth, file uploads, responsive layout. Lead with this in every interview.'},
+ {t:'<strong>Phase 5 (LLMs + RAG + MCP) is your highest-leverage phase</strong> for the 30–40 LPA target. Most AI Engineer JDs live here. The backend foundation you built in Phase 2 makes everything here significantly better.'},
+ {t:'<strong>MCP is 2025\'s biggest architectural shift.</strong> Building one MCP server that exposes your PostgreSQL database to Claude signals you\'re tracking the frontier — not just following tutorials.'},
+ {t:'<strong>Consistency beats intensity.</strong> 1 hr/day × 210 days is more than most bootcamps. The Sunday preview habit is worth building from week 1 — it primes your brain for the next session before you even sit down.'},
+];
+
+// ================================================================
+//  RENDER
+// ================================================================
+let totalSk=0,doneSk=0;
+function cc(c){return{yt:'yt',doc:'doc',course:'course',art:'art',gh:'gh'}[c]||'doc'}
+
+function renderPhases(){
+  const ct=document.getElementById('main-content');
+  PHASES.forEach((ph,pi)=>{
+    const sec=document.createElement('section');
+    sec.className='phase-sec';sec.id=ph.id;
+
+    // header
+    const phd=document.createElement('div');phd.className='ph';
+    const subtitle={p1:'Python · NumPy · Pandas · Math · Dev Tools',p2:'FastAPI · SQL · PostgreSQL · SQLAlchemy · Alembic · MongoDB · Redis · Celery · JWT · Performant AI Systems',p3:'Supervised · Unsupervised · Evaluation · MLflow · FastAPI integration',p4:'PyTorch · CNNs · Transformers · HuggingFace · Fine-tuning · LR Scheduling',p5:'LLMs · RAG · Chunking · Agents · MCP · Fine-tuning · DSPy · Production Stack',p6:'Azure · Docker · CI/CD · Monitoring · Capstone Projects',p7:'Portfolio · System Design · Interviews · Applications'}[ph.id]||ph.chip;
+    phd.innerHTML=`<span class="ph-no">${ph.no}</span><span class="ph-chip" style="color:${ph.color};border-color:${ph.cc};background:${ph.cb}">${ph.chip}</span><h2 class="ph-title">${subtitle}</h2><div class="ph-meta"><div class="wk">Weeks ${ph.wk}</div><div class="hr">${ph.hr}</div></div>`;
+    sec.appendChild(phd);
+
+    if(ph.banner){const b=document.createElement('div');b.className='banner';b.innerHTML=ph.banner;sec.appendChild(b);}
+
+    // weeks
+    const wg=document.createElement('div');wg.className='wgrid';
+    ph.weeks.forEach((wk,wi)=>{
+      const card=document.createElement('div');card.className='wcard'+(wi===0?' open':'');
+      const hdr=document.createElement('div');hdr.className='wcard-hdr';
+      hdr.innerHTML=`<span class="wcard-wn">${wk.w}</span><span class="wcard-topic">${wk.t}</span><span class="wcard-hrs">${wk.h}</span><span class="wcard-chev">▼</span>`;
+      // accordion handled by event delegation below
+      const body=document.createElement('div');body.className='wcard-body';
+      const tbl=document.createElement('table');tbl.className='dtable';
+      wk.days.forEach(day=>{
+        const tr=document.createElement('tr');
+        let rh='';
+        if(day.r&&day.r.length) rh='<div class="chips">'+day.r.map(r=>`<a href="${r.l}" target="_blank" rel="noopener" class="chip ${cc(r.c)}">${r.n}</a>`).join('')+'</div>';
+        tr.innerHTML=`<td class="dt-lbl">${day.d}</td><td class="dt-body"><div class="dn">${day.n}</div>${rh}</td>`;
+        tbl.appendChild(tr);
+      });
+      body.appendChild(tbl);
+      if(wk.wknd){const w=document.createElement('div');w.className='wknd';w.innerHTML=`<div class="wknd-lbl">⚡ Weekend Project</div><div class="wknd-txt">${wk.wknd}</div>`;body.appendChild(w);}
+      if(wk.insight){const ins=document.createElement('div');ins.className='insight';ins.innerHTML=`<div class="insight-lbl">⚙ Performance Insight</div><div class="insight-txt">${wk.insight}</div>`;body.appendChild(ins);}
+      card.appendChild(hdr);card.appendChild(body);wg.appendChild(card);
+    });
+    sec.appendChild(wg);
+
+    // skills
+    const skw=document.createElement('div');skw.className='skwrap';
+    skw.innerHTML=`<div class="sk-hdr">${ph.chip} Skills Checklist</div>`;
+    const skg=document.createElement('div');skg.className='skgrid';
+    (SKILLS[ph.id]||[]).forEach((sk,i)=>{
+      totalSk++;
+      const id=`sk-${ph.id}-${i}`;
+      const div=document.createElement('div');div.className='sk';
+      const lm={'e':'le','m':'lm','h':'lh'};const lt={'e':'beginner','m':'intermediate','h':'advanced'};
+      div.innerHTML=`<input type="checkbox" id="${id}"><label for="${id}">${sk.t}</label><span class="sklvl ${lm[sk.l]}">${lt[sk.l]}</span>`;
+      const cb=div.querySelector('input');
+      cb.onchange=()=>{doneSk+=cb.checked?1:-1;div.classList.toggle('done',cb.checked);updateProgress()};
+      skg.appendChild(div);
+    });
+    skw.appendChild(skg);sec.appendChild(skw);ct.appendChild(sec);
+  });
+}
+
+function renderProjects(){
+  const g=document.getElementById('pgrid');
+  PROJECTS.forEach(p=>{
+    const c=document.createElement('div');c.className=`pc${p.cls?' '+p.cls:''}`;
+    c.innerHTML=`<div class="pc-n"><span>Project ${p.n}</span><span class="pc-st">${'⭐'.repeat(p.s)}</span><span class="pc-m">${p.m}</span></div>
+    <div class="pc-title">${p.t}</div><div class="pc-desc">${p.d}</div>
+    <div class="pc-tags">${p.tags.map(t=>`<span class="pc-tag">${t}</span>`).join('')}</div>
+    <div class="pc-del">Deliverable: <span>${p.del}</span></div>`;
+    g.appendChild(c);
+  });
+}
+
+function renderPerf(){
+  const g=document.getElementById('perf-grid');
+  PERF_PATTERNS.forEach(p=>{
+    const c=document.createElement('div');c.className='pg-card';
+    const items=p.items.map(i=>{
+      const isObj=typeof i==='object';
+      const txt=isObj?i.t:i;
+      const hotTag=isObj&&i.hot?'<span class="hot">critical</span>':'';
+      return`<li>${txt}${hotTag}</li>`;
+    }).join('');
+    c.innerHTML=`<div class="pg-icon">${p.icon}</div><div class="pg-title">${p.title}</div><ul class="pg-list">${items}</ul>`;
+    g.appendChild(c);
+  });
+}
+
+function renderConcepts(){
+  const g=document.getElementById('cg');
+  CONCEPTS.forEach(c=>{
+    const d=document.createElement('div');d.className='cc';
+    d.innerHTML=`<div class="cc-t"><span class="cc-icon">${c.i}</span>${c.t}</div><ul>${c.items.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+    g.appendChild(d);
+  });
+}
+
+function renderResources(){
+  const g=document.getElementById('rgrid');
+  RESOURCES.forEach(r=>{
+    const d=document.createElement('div');d.className='rg';
+    d.innerHTML=`<div class="rg-t"><span class="rg-dot" style="background:${r.c}"></span>${r.t}</div>${r.items.map(i=>`<a href="${i.u}" target="_blank" rel="noopener" class="rl">${i.n}</a>`).join('')}`;
+    g.appendChild(d);
+  });
+}
+
+function renderSalary(){
+  const g=document.getElementById('sal-tl');
+  SALARY.forEach(s=>{
+    const d=document.createElement('div');d.className='sal-item';
+    d.innerHTML=`<div class="sal-ph">${s.ph}</div><div class="sal-card"><div class="sal-r">${s.r}</div><div class="sal-info"><div class="sal-sk">${s.sk}</div><div class="sal-nt">${s.note}</div></div><div class="sal-bw"><div class="sal-bt"><div class="sal-bf" style="width:${s.pct}%"></div></div></div></div>`;
+    g.appendChild(d);
+  });
+}
+
+function renderSchedule(){
+  const g=document.getElementById('sgrid');
+  SCHEDULE.forEach(s=>{
+    const d=document.createElement('div');d.className='scard';
+    d.innerHTML=`<div class="scard-t">${s.t}<span class="scard-h">${s.h}</span></div>${s.blocks.map(b=>`<div class="tb"><div class="tb-time">${b.r}</div><div class="tb-act">${b.a}</div></div>`).join('')}`;
+    g.appendChild(d);
+  });
+}
+
+function renderTips(){
+  const g=document.getElementById('tgrid');
+  TIPS.forEach(t=>{
+    const d=document.createElement('div');d.className='tip';
+    d.innerHTML=`<p>${t.t}</p>`;
+    g.appendChild(d);
+  });
+}
+
+function updateProgress(){
+  const pct=totalSk>0?Math.round((doneSk/totalSk)*100):0;
+  document.getElementById('ov-pct').textContent=pct+'%';
+  document.getElementById('ov-bar').style.width=pct+'%';
+  document.getElementById('tb-fill').style.width=pct+'%';
+  document.getElementById('tb-pct').textContent=doneSk+' / '+totalSk+' skills checked';
+}
+
+function initScrollSpy(){
+  const secs=document.querySelectorAll('.phase-sec[id]');
+  const links=document.querySelectorAll('.sn-link[data-s]');
+  if(!secs.length||!links.length)return;
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.toggle('on',l.getAttribute('data-s')===e.target.id));
+      }
+    });
+  },{rootMargin:'-58px 0px -60% 0px',threshold:0});
+  secs.forEach(s=>obs.observe(s));
+}
+
+// ── RENDER ALL CONTENT ──────────────────────────────────────────
+renderPhases();
+renderProjects();
+renderPerf();
+renderConcepts();
+renderResources();
+renderSalary();
+renderSchedule();
+renderTips();
+updateProgress();
+
+// ── NAVIGATION ───────────────────────────────────────────────────
+// All content is now in one scrollable page (.wrap).
+// Use event delegation on document so dynamically-injected links work too.
+const TOPBAR_H = 48;
+
+function scrollToId(id){
+  if(!id) return;
+  const el = document.getElementById(id);
+  if(!el) return;
+  const y = el.getBoundingClientRect().top + window.pageYOffset - TOPBAR_H - 8;
+  window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+}
+
+document.addEventListener('click', function(e){
+  const a = e.target.closest('a[href^="#"]');
+  if(!a) return;
+  const id = a.getAttribute('href').replace('#','');
+  if(!id) return;
+  e.preventDefault();
+  scrollToId(id);
+});
+
+// ── SCROLL SPY ────────────────────────────────────────────────────
+// Runs after a short delay so renderPhases() sections are in DOM
+function initScrollSpy(){
+  const secs = document.querySelectorAll('.phase-sec[id]');
+  const links = document.querySelectorAll('.sn-link[data-s]');
+  if(!secs.length || !links.length) return;
+
+  function setActive(id){
+    links.forEach(l => l.classList.toggle('on', l.getAttribute('data-s') === id));
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) setActive(e.target.id);
+    });
+  }, { rootMargin: '-' + TOPBAR_H + 'px 0px -55% 0px', threshold: 0 });
+
+  secs.forEach(s => obs.observe(s));
+}
+
+setTimeout(initScrollSpy, 150);
+
+// ── WEEK ACCORDION (event delegation — works on injected elements) ─
+document.addEventListener('click', function(e){
+  const hdr = e.target.closest('.wcard-hdr');
+  if(!hdr) return;
+  const card = hdr.closest('.wcard');
+  if(!card) return;
+  card.classList.toggle('open');
+});
+</script>
+</body>
+</html>
